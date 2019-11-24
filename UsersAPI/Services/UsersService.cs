@@ -19,11 +19,11 @@ namespace UsersAPI.Services
             _Users = database.GetCollection<UserNode>(settings.UsersCollectionName);
         }
 
-        public List<UserNode> Get() =>
-        _Users.Find(user => true).ToList();
+         public List<UserNode> Get() =>
+         _Users.Find(user => true).ToList();
 
-        public UserNode Get(string Username) =>
-            _Users.Find<UserNode>(user => user.Username == Username).FirstOrDefault();
+        public UserNode Get(string username) =>
+            _Users.Find(user => user.Username == username).FirstOrDefault();
 
         public UserNode Create(UserNode user)
         {
@@ -31,13 +31,14 @@ namespace UsersAPI.Services
             return user;
         }
 
-        public void Update(string Username, UserNode userIn) =>
-            _Users.ReplaceOne(user => user.Username == Username, userIn);
+        public void Update(string username, UserNode UserIn) =>
+            _Users.ReplaceOne(user => user.Username == username, UserIn);
 
         public void Remove(UserNode userIn) =>
             _Users.DeleteOne(user => user.Username == userIn.Username);
 
-        public void Remove(string Username) =>
-            _Users.DeleteOne(user => user.Username == Username);
+        public void Remove(string username) => 
+            _Users.DeleteOne(user => user.Username == username);
+    
     }
 }
