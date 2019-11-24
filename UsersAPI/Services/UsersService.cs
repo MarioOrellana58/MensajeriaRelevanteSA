@@ -27,6 +27,7 @@ namespace UsersAPI.Services
 
         public UserNode Create(UserNode user)
         {
+
             _Users.InsertOne(user);
             return user;
         }

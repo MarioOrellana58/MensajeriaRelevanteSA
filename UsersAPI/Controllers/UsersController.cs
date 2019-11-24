@@ -42,9 +42,15 @@ namespace Pizza_API.Controllers
         [HttpPost]
         public ActionResult<UserNode> Create(UserNode user)
         {
+            var findUser = _userService.Get(user.Username);
+
+            if (findUser != null)
+            {
+                return StatusCode(418, "That username already exists :( try another one");
+            }
             _userService.Create(user);
 
-            return CreatedAtRoute("GetUser", new { Username = user.Username.ToString() }, user);
+            return StatusCode(200, "Your user has been created :D");
         }
 
         [HttpPut("{Username}")]
