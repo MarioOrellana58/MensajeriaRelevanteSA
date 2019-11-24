@@ -46,7 +46,7 @@ namespace Pizza_API.Controllers
 
             if (findUser != null)
             {
-                return StatusCode(418, "That username already exists :( try another one");
+                return StatusCode(409, "That username already exists :( try another one");
             }
             _userService.Create(user);
 
@@ -56,6 +56,7 @@ namespace Pizza_API.Controllers
         [HttpPut("{Username}")]
         public IActionResult Update(string username, UserNode userIn)
         {
+            //TODO, validar que no pueda poner un username de otro usuario
             var user = _userService.Get(username);
 
             if (user == null)
