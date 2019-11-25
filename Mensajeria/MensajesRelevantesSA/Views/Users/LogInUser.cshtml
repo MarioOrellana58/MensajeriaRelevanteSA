@@ -8,14 +8,14 @@
 {
 	<h2>LogInUser</h2>
 	<p align="center">Ingrese su nombre de usuario</p>
-	<p align="center"><input type="text" name="userName" style="visibility:visible" /></p>
+	<p align="center"><input type="text" name="userName" style="visibility:visible" required = "required" /></p>
 	<p align="center">Ingrese su contraseña</p>
-	<p align="center"><input type="text" name="userPassword" style="visibility:visible" /></p>
+	<p align="center"><input type="text" name="userPassword" style="visibility:visible" required = "required" /></p>
 	<p align="center"><input type="submit" value="Subir" /></p>
 	<table style="width:100%" border="0" align="right">
 		<tr>
 			<td align="center">
-				 @Html.ActionLink("¿Olvido su contraseña? ", "CreateUser", "Users", new { area = "" }, new { @class = "navbar-brand", @style = "width:240px; text-align:center" })
+				 @Html.ActionLink("¿Olvido su contraseña? ", "ChangePassword", "Users", new { area = "" }, new { @class = "navbar-brand", @style = "width:240px; text-align:center" })
 			</td>
 		</tr>
 		<tr>

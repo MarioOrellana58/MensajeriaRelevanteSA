@@ -12,5 +12,9 @@ namespace MensajesRelevantesSA.Models
         public string Username { get; set; }
 
         public string Password { get; set; }
+
+        public string Question { get; set; }
+
+        public string QuestionAnswer { get; set; }
     }
 }

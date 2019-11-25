@@ -29,11 +29,20 @@ namespace MensajesRelevantesSA.Controllers
         [HttpGet]
         public ActionResult CreateUser()
         {
-            return View();
+            List<string> questionsForUsers = new List<string>()
+            {
+                "¿ Cuál es el nombre de tu personaje favorito ?",
+                "¿ Cuál es el nombre de tu mascota ?",
+                "¿ Cuál es el nombre de tu familiar mas querido ?",
+                "¿Cuál es tu comida favorita ?"
+            };
+            return View(questionsForUsers);
         }
         [HttpPost]
-        public ActionResult CreateUser(string userName, string userPassword)
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateUser(string userName, string userPassword, string userQuestion, string userAnswer)
         {
+
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri("http://localhost:51209/api/Users");
@@ -61,17 +70,38 @@ namespace MensajesRelevantesSA.Controllers
                     }
                 }
             }
-            return View();
+            List<string> questionsForUsers = new List<string>()
+            {
+                "¿ Cuál es el nombre de tu personaje favorito ?",
+                "¿ Cuál es el nombre de tu mascota ?",
+                "¿ Cuál es el nombre de tu familiar mas querido ?",
+                "¿Cuál es tu comida favorita ?"
+            };
+            return View(questionsForUsers);
         }
         [HttpGet]
         public ActionResult ChangePassword()
         {
-            return View();
+            List<string> questionsForUsers = new List<string>()
+            {
+                "¿ Cuál es el nombre de tu personaje favorito ?",
+                "¿ Cuál es el nombre de tu mascota ?",
+                "¿ Cuál es el nombre de tu familiar mas querido ?",
+                "¿Cuál es tu comida favorita ?"
+            };
+            return View(questionsForUsers);
         }
         [HttpPost]
-        public ActionResult ChangePassword(string userName)
+        public ActionResult ChangePassword(string userName, string newPassword, string questionSelected, string secretAnswer)
         {
-            return View();
+            List<string> questionsForUsers = new List<string>()
+            {
+                "¿ Cuál es el nombre de tu personaje favorito ?",
+                "¿ Cuál es el nombre de tu mascota ?",
+                "¿ Cuál es el nombre de tu familiar mas querido ?",
+                "¿Cuál es tu comida favorita ?"
+            };
+            return View(questionsForUsers);
         }
     }
 }

@@ -1,30 +1,41 @@
-﻿
+﻿@model List<String>
 @{
-    ViewBag.Title = "CreateUser";
+	ViewBag.Title = "CreateUser";
+	string[] QuestionsForUser = (string[])ViewBag.QuestionsForuser;
 }
 
 <h2>CreateUser</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+	@Html.AntiForgeryToken()
+
+	<div class="form-horizontal">
+		<hr />
+		@Html.ValidationSummary(true, "", new { @class = "text-danger" })
 		<div class="form-group">
 			<div class="col-md-offset-2 col-md-10">
 				<p align="center">Ingrese su nombre de usuario</p>
-				<p align="center"><input type="text" name="userName" style="visibility:visible" /></p>
+				<p align="center"><input type="text" name="userName" style="visibility:visible" required = "required" /></p>
 			</div>
 			<div class="col-md-offset-2 col-md-10">
 				<p align="center">Ingrese su contraseña</p>
-				<p align="center"><input type="text" name="userPassword" style="visibility:visible" /></p>
+				<p align="center"><input type="text" name="userPassword" style="visibility:visible" required = "required" /></p>
+			</div>
+			<div class="col-md-offset-2 col-md-10">
+				<p align="center">Elija su pregunta</p>
+				<p align="center">@Html.DropDownList("userQuestion", new SelectList(Model),
+				"-- Seleccione una pregunta --",
+				new { @class = "form-control", placeholder = "short name", required = "required" })</p>
+			</div>
+			<div class="col-md-offset-2 col-md-10">
+				<p align="center">Ingrese su respuesta</p>
+				<p align="center"><input type="text" name="userAnswer" style="visibility:visible" required = "required" /></p>
 			</div>
 			<div class="col-md-offset-2 col-md-10">
 				<p align="center"><input type="submit" value="Crear usuario" class="btn btn-default" /></p>
 			</div>
 		</div>
-    </div>
+	</div>
 	<p>@Html.ActionLink("Regresar al logIn", "LogInUser", "Users", new { area = "" }, new { @class = "navbar-brand", @style = "width:240px; text-align:center" })</p>
 }
