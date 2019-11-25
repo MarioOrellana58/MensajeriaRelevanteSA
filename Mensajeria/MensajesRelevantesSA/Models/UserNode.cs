@@ -15,6 +15,6 @@ namespace MensajesRelevantesSA.Models
 
         public string Question { get; set; }
 
-        public string QuestionAnswer { get; set; }
+        public string Answer { get; set; }
     }
 }
