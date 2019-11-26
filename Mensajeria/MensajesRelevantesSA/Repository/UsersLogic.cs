@@ -53,5 +53,85 @@ namespace MensajesRelevantesSA.Repository
                 }
             }
         }
+
+        dynamic getUserByUsername(string userName)
+        {
+            using (var client = new HttpClient())
+            {
+
+                client.BaseAddress = new Uri("http://localhost:51209/api/Users");
+                UserNode searchedUser = null;
+                var responseTask = client.GetAsync("Users/" + userName);
+                responseTask.Wait();
+
+                var result = responseTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = result.Content.ReadAsAsync<UserNode>();
+                    readTask.Wait();
+                    searchedUser = readTask.Result;
+                    return searchedUser;
+                }
+                else
+                {
+
+                    searchedUser = null;
+                    if ((int)result.StatusCode == 404)
+                    {
+                        return "404 no encontrado. El usuario que has ingresado no existe :(";
+                    }
+                    else
+                    {
+                        return result.StatusCode.ToString() + ". Contacte a un desarrollador del sistema D:";
+                    }
+                }
+            }
+        }
+
+        public string ModifyPassword(string userName, string secretQuestion, string secretAnswer, string newPassword)
+        {
+            using (var client = new HttpClient())
+            {
+                var searchedUser = getUserByUsername(userName);
+
+                if (searchedUser.GetType().ToString() == "string")
+                {
+                    return searchedUser;
+                }
+
+                client.BaseAddress = new Uri("http://localhost:51209/api/Users");
+
+                if (searchedUser.Question != secretQuestion || searchedUser.Answer != secretAnswer)
+                {
+                    return "Tu pregunta y o respuesta no son válidas >:(";
+                }
+
+                var updatedUser = new UserNode() { Username = userName, Password = newPassword, Answer = secretAnswer, Question = secretAnswer };
+
+                var putTask = client.PutAsJsonAsync("Users", updatedUser);
+                putTask.Wait();
+
+                var result = putTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+
+                    return "200. Contraseña actualizada :D";
+                }
+                else
+                {
+
+                    if ((int)result.StatusCode >= 400 && (int)result.StatusCode < 500)
+                    {
+                        return result.StatusCode.ToString() + ". Revise los datos ingresados :D";
+                    }
+                    else
+                    {
+                        return result.StatusCode.ToString() + ". Contacte a un desarrollador del sistema D:";
+                    }
+                }
+            }
+
+        }
+
     }
 }

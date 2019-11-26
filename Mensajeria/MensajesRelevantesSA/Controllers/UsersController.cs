@@ -48,6 +48,8 @@ namespace MensajesRelevantesSA.Controllers
         [HttpPost]
         public ActionResult ChangePassword(string userName, string newPassword, string questionSelected, string secretAnswer)
         {
+            var operationStatusCode = User.ModifyPassword(userName, questionSelected, secretAnswer, newPassword);
+            ModelState.AddModelError(string.Empty, operationStatusCode);            
             return View(User.GetQuestions());
         }
     }
