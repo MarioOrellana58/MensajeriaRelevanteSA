@@ -25,6 +25,7 @@ namespace MensajesRelevantesSA.Repository
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri("http://localhost:51209/api/Users");
+                //*****************************************************
                 var user = new UserNode() { Username = userName, Password = userPassword, Answer = userAnswer, Question = userQuestion};
 
                 var postTask = client.PostAsJsonAsync("Users", user);
@@ -58,7 +59,6 @@ namespace MensajesRelevantesSA.Repository
         {
             using (var client = new HttpClient())
             {
-
                 client.BaseAddress = new Uri("http://localhost:51209/api/Users");
                 UserNode searchedUser = null;
                 var responseTask = client.GetAsync("Users/" + userName);
@@ -100,7 +100,7 @@ namespace MensajesRelevantesSA.Repository
                 }
 
                 client.BaseAddress = new Uri("http://localhost:51209/api/Users");
-
+                //*****************************************************
                 if (searchedUser.Question != secretQuestion || searchedUser.Answer != secretAnswer)
                 {
                     return "Tu pregunta y o respuesta no son válidas >:(";
@@ -140,13 +140,15 @@ namespace MensajesRelevantesSA.Repository
             {
                 return searchedUser;
             }
-
+            //*****************************************************
             if (searchedUser.Password != password)
             {
                 return "Tu contraseña es incorrecta :(";
             }
             else
             {
+                //generar aqui el token
+
                 return  "Contraseña correcta :D bienvenido al sistema";
             }
 
