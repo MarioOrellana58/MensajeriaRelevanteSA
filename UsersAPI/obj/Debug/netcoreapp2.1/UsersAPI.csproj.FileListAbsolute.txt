@@ -54,3 +54,6 @@ D:\DOCUMENTOS\INGENIERIA\2do\2do Ciclo\EDII\Lab\Proyecto\LoginViews\MensajeriaRe
 D:\DOCUMENTOS\INGENIERIA\2do\2do Ciclo\EDII\Lab\Proyecto\LoginViews\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.RazorTargetAssemblyInfo.cache
 D:\DOCUMENTOS\INGENIERIA\2do\2do Ciclo\EDII\Lab\Proyecto\LoginViews\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.dll
 D:\DOCUMENTOS\INGENIERIA\2do\2do Ciclo\EDII\Lab\Proyecto\LoginViews\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.pdb
+C:\Users\José\Documents\Estructura De Datos II\Proyecto actual\MensajeriaRelevanteSA\UsersAPI\bin\Debug\netcoreapp2.1\AlternativeProcesses.dll
+C:\Users\José\Documents\Estructura De Datos II\Proyecto actual\MensajeriaRelevanteSA\UsersAPI\bin\Debug\netcoreapp2.1\AlternativeProcesses.pdb
+C:\Users\José\Documents\Estructura De Datos II\Proyecto actual\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.csproj.CopyComplete
