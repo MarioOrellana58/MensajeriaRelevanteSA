@@ -23,8 +23,8 @@ namespace AlternativeProcesses
             {
                 for (int j = 0; j < 8; j++)
                 {
-                    var valIP = Convert.ToInt16(Convert.ToString(IP[j]));
-                    if (valIP.Equals(i))
+                    var valIP = Convert.ToInt32(Convert.ToString(IP[j]));
+                    if (valIP == i)
                     {
                         IPInv += j;
                         break;
@@ -33,23 +33,44 @@ namespace AlternativeProcesses
             }
         }
 
-        public string CipherDecipherText(string inputString, string SDESKey, bool cipher)
+        public string CipherText(string inputString)
         {
-            var key = Convert.ToString(Convert.ToInt32(SDESKey), 2);
+            var key = "1000110101";
             key = fillKey(key);
             LoadPermutation();
-            var kValues = GenerateK1AndK2(key);
-            var byteBuffer = new byte[inputString.Length];
-            var outputByteBuffer = new byte[inputString.Length];
+            key = fillKey(key);
+            var valoresDeK = GenerateK1AndK2(key);
+            var byteBuffer = new byte[Encoding.ASCII.GetBytes(inputString).Length];
             byteBuffer = Encoding.Default.GetBytes(inputString);
-            for (int i = 0; i < inputString.Length; i++)
+            var outputText = string.Empty;
+            for (int i = 0; i < byteBuffer.Length; i++)
             {
                 var decipheredByte = Convert.ToString(byteBuffer[i], 2).PadLeft(8, '0');
-                var cipheredByte = !cipher ? CipherByte(kValues[0], kValues[1], decipheredByte, string.Empty, true) :
-                                                    CipherByte(kValues[1], kValues[0], decipheredByte, string.Empty, true);
+                var cipheredByte = CipherByte(valoresDeK[0], valoresDeK[1], decipheredByte, string.Empty, true);
+                var asciiCipheredByte = Convert.ToInt16(cipheredByte, 2);
+                outputText += Convert.ToString(Convert.ToByte(asciiCipheredByte)) + "|";
+            }
+            
+            return outputText;
+        }
+        public string DecipherText(string inputString)
+        {
+            var key = "1000110101";
+            key = fillKey(key);
+            LoadPermutation();
+            key = fillKey(key);
+            var valoresDeK = GenerateK1AndK2(key);
+            inputString = inputString.Substring(0, inputString.Length - 1);
+            var byteBuffer = inputString.Split('|');
+            var outputByteBuffer = new byte[byteBuffer.Length];
+            for (int i = 0; i < byteBuffer.Length; i++)
+            {
+                var decipheredByte = Convert.ToString(Convert.ToInt32(byteBuffer[i]), 2).PadLeft(8, '0');
+                var cipheredByte = CipherByte(valoresDeK[1], valoresDeK[0], decipheredByte, string.Empty, true);
                 var asciiCipheredByte = Convert.ToInt16(cipheredByte, 2);
                 outputByteBuffer[i] = Convert.ToByte(asciiCipheredByte);
             }
+
             return Encoding.Default.GetString(outputByteBuffer);
         }
 
@@ -239,6 +260,5 @@ namespace AlternativeProcesses
         {
             return (inputString.Substring(inputString.Length / 2, inputString.Length / 2) + inputString.Substring(0, inputString.Length / 2));
         }
-
     }
 }

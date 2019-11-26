@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Web;
-
+using System.Security.Cryptography;
+using System.Text;
 namespace MensajesRelevantesSA.Repository
 {
     public class UsersLogic
@@ -25,7 +26,17 @@ namespace MensajesRelevantesSA.Repository
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri("http://localhost:51209/api/Users");
-                //*****************************************************
+                var hash256 = SHA256.Create();
+
+                var hashedBytes = hash256.ComputeHash(Encoding.Default.GetBytes(userPassword));
+                userPassword = Encoding.Default.GetString(hashedBytes);
+
+                hashedBytes = hash256.ComputeHash(Encoding.Default.GetBytes(userAnswer));
+                userAnswer = Encoding.Default.GetString(hashedBytes);
+
+                hashedBytes = hash256.ComputeHash(Encoding.Default.GetBytes(userQuestion));
+                userQuestion = Encoding.Default.GetString(hashedBytes);
+
                 var user = new UserNode() { Username = userName, Password = userPassword, Answer = userAnswer, Question = userQuestion};
 
                 var postTask = client.PostAsJsonAsync("Users", user);
@@ -100,7 +111,18 @@ namespace MensajesRelevantesSA.Repository
                 }
 
                 client.BaseAddress = new Uri("http://localhost:51209/api/Users");
-                //*****************************************************
+
+                var hash256 = SHA256.Create();
+
+                var hashedBytes = hash256.ComputeHash(Encoding.Default.GetBytes(newPassword));
+                newPassword = Encoding.Default.GetString(hashedBytes);
+
+                hashedBytes = hash256.ComputeHash(Encoding.Default.GetBytes(secretAnswer));
+                secretAnswer = Encoding.Default.GetString(hashedBytes);
+
+                hashedBytes = hash256.ComputeHash(Encoding.Default.GetBytes(secretQuestion));
+                secretQuestion = Encoding.Default.GetString(hashedBytes);
+
                 if (searchedUser.Question != secretQuestion || searchedUser.Answer != secretAnswer)
                 {
                     return "Tu pregunta y o respuesta no son válidas >:(";
@@ -140,7 +162,11 @@ namespace MensajesRelevantesSA.Repository
             {
                 return searchedUser;
             }
-            //*****************************************************
+            var hash256 = SHA256.Create();
+
+            var hashedBytes = hash256.ComputeHash(Encoding.Default.GetBytes(password));
+            password = Encoding.Default.GetString(hashedBytes);
+
             if (searchedUser.Password != password)
             {
                 return "Tu contraseña es incorrecta :(";

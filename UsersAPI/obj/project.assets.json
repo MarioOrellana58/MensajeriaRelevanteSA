@@ -4990,6 +4990,15 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XPath.XDocument.dll": {}
         }
+      },
+      "AlternativeProcesses/1.0.0": {
+        "type": "project",
+        "compile": {
+          "bin/placeholder/AlternativeProcesses.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/AlternativeProcesses.dll": {}
+        }
       }
     }
   },
@@ -13479,10 +13488,16 @@
         "system.xml.xpath.xdocument.4.3.0.nupkg.sha512",
         "system.xml.xpath.xdocument.nuspec"
       ]
+    },
+    "AlternativeProcesses/1.0.0": {
+      "type": "project",
+      "path": "../Mensajeria/AlternativeProcesses/AlternativeProcesses.csproj",
+      "msbuildProject": "../Mensajeria/AlternativeProcesses/AlternativeProcesses.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.1": [
+      "AlternativeProcesses >= 1.0.0",
       "Microsoft.AspNetCore.App >= 2.1.1",
       "Microsoft.AspNetCore.Razor.Design >= 2.1.2",
       "Microsoft.NETCore.App >= 2.1.0",
@@ -13497,11 +13512,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\José\\Documents\\Estructura De Datos II\\Proyecto actual\\MensajeriaRelevanteSA(actual)\\UsersAPI\\UsersAPI.csproj",
+      "projectUniqueName": "C:\\Users\\José\\Documents\\Estructura De Datos II\\Proyecto actual\\MensajeriaRelevanteSA\\UsersAPI\\UsersAPI.csproj",
       "projectName": "UsersAPI",
-      "projectPath": "C:\\Users\\José\\Documents\\Estructura De Datos II\\Proyecto actual\\MensajeriaRelevanteSA(actual)\\UsersAPI\\UsersAPI.csproj",
+      "projectPath": "C:\\Users\\José\\Documents\\Estructura De Datos II\\Proyecto actual\\MensajeriaRelevanteSA\\UsersAPI\\UsersAPI.csproj",
       "packagesPath": "C:\\Users\\José\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\José\\Documents\\Estructura De Datos II\\Proyecto actual\\MensajeriaRelevanteSA(actual)\\UsersAPI\\obj\\",
+      "outputPath": "C:\\Users\\José\\Documents\\Estructura De Datos II\\Proyecto actual\\MensajeriaRelevanteSA\\UsersAPI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -13519,7 +13534,11 @@
       },
       "frameworks": {
         "netcoreapp2.1": {
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\José\\Documents\\Estructura De Datos II\\Proyecto actual\\MensajeriaRelevanteSA\\Mensajeria\\AlternativeProcesses\\AlternativeProcesses.csproj": {
+              "projectPath": "C:\\Users\\José\\Documents\\Estructura De Datos II\\Proyecto actual\\MensajeriaRelevanteSA\\Mensajeria\\AlternativeProcesses\\AlternativeProcesses.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
