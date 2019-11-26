@@ -171,6 +171,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ChatsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -216,6 +217,8 @@
     <Content Include="Views\Users\LogInUser.cshtml" />
     <Content Include="Views\Users\CreateUser.cshtml" />
     <Content Include="Views\Users\ChangePassword.cshtml" />
+    <Content Include="Views\Chats\Index.cshtml" />
+    <Content Include="Views\Chats\_Chats.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -25,9 +25,16 @@ namespace MensajesRelevantesSA.Controllers
         [HttpPost]
         public ActionResult LogInUser(string userName, string userPassword)
         {
-            var operationStatusCode = User.Validate(userName, userPassword);            
-            ModelState.AddModelError(string.Empty, operationStatusCode);
-            return View();
+            var operationStatusCode = User.Validate(userName, userPassword);
+            if (operationStatusCode == "200")
+            {                
+                 return RedirectToAction("Index", "Chats");
+            }
+            else
+            {
+                ModelState.AddModelError(string.Empty, operationStatusCode);
+                return View();
+            }
         }
         [HttpGet]
         public ActionResult CreateUser()

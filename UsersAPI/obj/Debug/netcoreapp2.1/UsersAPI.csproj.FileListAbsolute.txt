@@ -57,3 +57,20 @@ D:\DOCUMENTOS\INGENIERIA\2do\2do Ciclo\EDII\Lab\Proyecto\LoginViews\MensajeriaRe
 C:\Users\José\Documents\Estructura De Datos II\Proyecto actual\MensajeriaRelevanteSA\UsersAPI\bin\Debug\netcoreapp2.1\AlternativeProcesses.dll
 C:\Users\José\Documents\Estructura De Datos II\Proyecto actual\MensajeriaRelevanteSA\UsersAPI\bin\Debug\netcoreapp2.1\AlternativeProcesses.pdb
 C:\Users\José\Documents\Estructura De Datos II\Proyecto actual\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.csproj.CopyComplete
+D:\DOCUMENTOS\INGENIERIA\2do\2do Ciclo\EDII\Lab\Proyecto\PassCipher\MensajeriaRelevanteSA\UsersAPI\bin\Debug\netcoreapp2.1\UsersAPI.deps.json
+D:\DOCUMENTOS\INGENIERIA\2do\2do Ciclo\EDII\Lab\Proyecto\PassCipher\MensajeriaRelevanteSA\UsersAPI\bin\Debug\netcoreapp2.1\UsersAPI.runtimeconfig.json
+D:\DOCUMENTOS\INGENIERIA\2do\2do Ciclo\EDII\Lab\Proyecto\PassCipher\MensajeriaRelevanteSA\UsersAPI\bin\Debug\netcoreapp2.1\UsersAPI.runtimeconfig.dev.json
+D:\DOCUMENTOS\INGENIERIA\2do\2do Ciclo\EDII\Lab\Proyecto\PassCipher\MensajeriaRelevanteSA\UsersAPI\bin\Debug\netcoreapp2.1\UsersAPI.dll
+D:\DOCUMENTOS\INGENIERIA\2do\2do Ciclo\EDII\Lab\Proyecto\PassCipher\MensajeriaRelevanteSA\UsersAPI\bin\Debug\netcoreapp2.1\UsersAPI.pdb
+D:\DOCUMENTOS\INGENIERIA\2do\2do Ciclo\EDII\Lab\Proyecto\PassCipher\MensajeriaRelevanteSA\UsersAPI\bin\Debug\netcoreapp2.1\AlternativeProcesses.dll
+D:\DOCUMENTOS\INGENIERIA\2do\2do Ciclo\EDII\Lab\Proyecto\PassCipher\MensajeriaRelevanteSA\UsersAPI\bin\Debug\netcoreapp2.1\AlternativeProcesses.pdb
+D:\DOCUMENTOS\INGENIERIA\2do\2do Ciclo\EDII\Lab\Proyecto\PassCipher\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.csprojAssemblyReference.cache
+D:\DOCUMENTOS\INGENIERIA\2do\2do Ciclo\EDII\Lab\Proyecto\PassCipher\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.csproj.CoreCompileInputs.cache
+D:\DOCUMENTOS\INGENIERIA\2do\2do Ciclo\EDII\Lab\Proyecto\PassCipher\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.RazorAssemblyInfo.cache
+D:\DOCUMENTOS\INGENIERIA\2do\2do Ciclo\EDII\Lab\Proyecto\PassCipher\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.RazorAssemblyInfo.cs
+D:\DOCUMENTOS\INGENIERIA\2do\2do Ciclo\EDII\Lab\Proyecto\PassCipher\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.AssemblyInfoInputs.cache
+D:\DOCUMENTOS\INGENIERIA\2do\2do Ciclo\EDII\Lab\Proyecto\PassCipher\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.AssemblyInfo.cs
+D:\DOCUMENTOS\INGENIERIA\2do\2do Ciclo\EDII\Lab\Proyecto\PassCipher\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.RazorTargetAssemblyInfo.cache
+D:\DOCUMENTOS\INGENIERIA\2do\2do Ciclo\EDII\Lab\Proyecto\PassCipher\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.csproj.CopyComplete
+D:\DOCUMENTOS\INGENIERIA\2do\2do Ciclo\EDII\Lab\Proyecto\PassCipher\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.dll
+D:\DOCUMENTOS\INGENIERIA\2do\2do Ciclo\EDII\Lab\Proyecto\PassCipher\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.pdb

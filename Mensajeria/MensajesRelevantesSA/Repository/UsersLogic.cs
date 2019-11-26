@@ -175,7 +175,7 @@ namespace MensajesRelevantesSA.Repository
             {
                 //generar aqui el token
 
-                return  "Contraseña correcta :D bienvenido al sistema";
+                return  "200";
             }
 
         }

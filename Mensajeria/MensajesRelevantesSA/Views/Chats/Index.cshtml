@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "Mensajería Relevante S.A.";
+}
+
+<div style="width:1200px; height:470px; padding:3px; float:left" ;>
+    <div style="width:245px; overflow:scroll; height:447px; background:#dadada; float:left;">
+        @Html.Partial("_Chats", (List<string>)ViewBag.chats)
+    </div>
+    <div style="width:945px;  float:right;">
+        @using (Html.BeginForm())
+        {
+            <div class="col-lg-10">
+                <textarea class="form-control" name="textArea1" id="textArea" rows="20" cols="70" onkeyup=" var start = this.selectionStart;
+                                                                                                            var end = this.selectionEnd;
+                                                                                                            this.value = this.value.toUpperCase();
+                                                                                                            this.setSelectionRange(start, end);">@ViewBag.texto</textarea>
+            </div>
+            <div class="col-xs-10 col-md-2">
+                <button class="btn btn-success" type="submit">Ejecutar</button>
+            </div>
+        }
+    </div>
+</div>
+
+
