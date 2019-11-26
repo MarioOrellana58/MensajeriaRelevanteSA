@@ -94,7 +94,7 @@ namespace MensajesRelevantesSA.Repository
             {
                 var searchedUser = getUserByUsername(userName);
 
-                if (searchedUser.GetType().ToString() == "string")
+                if (searchedUser.GetType().ToString() == "System.String")
                 {
                     return searchedUser;
                 }
@@ -106,9 +106,9 @@ namespace MensajesRelevantesSA.Repository
                     return "Tu pregunta y o respuesta no son válidas >:(";
                 }
 
-                var updatedUser = new UserNode() { Username = userName, Password = newPassword, Answer = secretAnswer, Question = secretAnswer };
+                var updatedUser = new UserNode() { Username = userName, Password = newPassword, Question = secretQuestion, Answer = secretAnswer };
 
-                var putTask = client.PutAsJsonAsync("Users", updatedUser);
+                var putTask = client.PutAsJsonAsync("Users/" + userName, updatedUser);
                 putTask.Wait();
 
                 var result = putTask.Result;
@@ -122,7 +122,7 @@ namespace MensajesRelevantesSA.Repository
 
                     if ((int)result.StatusCode >= 400 && (int)result.StatusCode < 500)
                     {
-                        return result.StatusCode.ToString() + ". Revise los datos ingresados :D";
+                        return result.StatusCode.ToString() + ". Revise los datos ingresados D:";
                     }
                     else
                     {
@@ -136,8 +136,7 @@ namespace MensajesRelevantesSA.Repository
         public string Validate(string userName, string password)
         {
             var searchedUser = getUserByUsername(userName);
-
-            if (searchedUser.GetType().ToString() ==  "string")
+            if (searchedUser.GetType().ToString() ==  "System.String")
             {
                 return searchedUser;
             }
