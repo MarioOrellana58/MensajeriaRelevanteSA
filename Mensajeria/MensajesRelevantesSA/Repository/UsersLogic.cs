@@ -133,5 +133,24 @@ namespace MensajesRelevantesSA.Repository
 
         }
 
+        public string Validate(string userName, string password)
+        {
+            var searchedUser = getUserByUsername(userName);
+
+            if (searchedUser.GetType().ToString() ==  "string")
+            {
+                return searchedUser;
+            }
+
+            if (searchedUser.Password != password)
+            {
+                return "Tu contraseña es incorrecta :(";
+            }
+            else
+            {
+                return  "Contraseña correcta :D bienvenido al sistema";
+            }
+
+        }
     }
 }
