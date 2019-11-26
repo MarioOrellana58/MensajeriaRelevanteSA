@@ -11,6 +11,8 @@ namespace MensajesRelevantesSA.Controllers
         // GET: Chats
         public ActionResult Index()
         {
+                        ViewBag.chats = new List<string> { "José", "Eduardo", "Mario", "Estuardo", "Diana", "Marroquin",
+                 "José", "Eduardo", "Mario", "Estuardo", "Diana", "Marroquin"};
             return View();
         }
 
