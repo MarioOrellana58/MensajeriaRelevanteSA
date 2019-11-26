@@ -1,28 +1,30 @@
 ﻿
 @{
-	/**/
+    /**/
 
-	ViewBag.Title = "LogInUser";
+    ViewBag.Title = "LogInUser";
 }
 @using (Html.BeginForm("LogInUser", "Users", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-	<h2>LogInUser</h2>
-	<p align="center">Ingrese su nombre de usuario</p>
-	<p align="center"><input type="text" name="userName" style="visibility:visible" /></p>
-	<p align="center">Ingrese su contraseña</p>
-	<p align="center"><input type="text" name="userPassword" style="visibility:visible" /></p>
-	<p align="center"><input type="submit" value="Subir" /></p>
-	<table style="width:100%" border="0" align="right">
-		<tr>
-			<td align="center">
-				 @Html.ActionLink("¿Olvido su contraseña? ", "CreateUser", "Users", new { area = "" }, new { @class = "navbar-brand", @style = "width:240px; text-align:center" })
-			</td>
-		</tr>
-		<tr>
-			<td align="center">
-				@Html.ActionLink("¿No tiene una cuenta?", "CreateUser", "Users", new { area = "" }, new { @class = "navbar-brand" })
-			</td>
-		</tr>
-	</table>
-	
+
+    <h2 align="center">Login User</h2>
+    <p align="center">Ingrese su nombre de usuario</p>
+    <p align="center"><input type="text" name="userName" required="required" maxlength="50"/></p>
+    <p align="center">Ingrese su contraseña</p>
+    <p align="center"><input type="text" name="userPassword" required="required" maxlength="50"/></p>
+    <p align="center"><input type="submit" value="Subir" /></p>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <table style="width:100%" border="0" align="right">
+        <tr>
+            <td align="center">
+                @Html.ActionLink("¿Olvido su contraseña? ", "ChangePassword", "Users", new { area = "" }, new { @class = "navbar-brand", @style = "width:240px; text-align:center" })
+            </td>
+        </tr>
+        <tr>
+            <td align="center">
+                @Html.ActionLink("¿No tiene una cuenta?", "CreateUser", "Users", new { area = "" }, new { @class = "navbar-brand" })
+            </td>
+        </tr>
+    </table>
+
 }

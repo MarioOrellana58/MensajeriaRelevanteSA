@@ -12,3 +12,45 @@ C:\Users\José\Documents\Estructura De Datos II\Proyecto\UsersAPI\obj\Debug\netc
 C:\Users\José\Documents\Estructura De Datos II\Proyecto\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.RazorTargetAssemblyInfo.cache
 C:\Users\José\Documents\Estructura De Datos II\Proyecto\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.dll
 C:\Users\José\Documents\Estructura De Datos II\Proyecto\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.pdb
+D:\DOCUMENTOS\INGENIERIA\2do\2do Ciclo\EDII\Lab\Proyecto\UserViews - Copy\MensajeriaRelevanteSA\UsersAPI\bin\Debug\netcoreapp2.1\UsersAPI.deps.json
+D:\DOCUMENTOS\INGENIERIA\2do\2do Ciclo\EDII\Lab\Proyecto\UserViews - Copy\MensajeriaRelevanteSA\UsersAPI\bin\Debug\netcoreapp2.1\UsersAPI.runtimeconfig.json
+D:\DOCUMENTOS\INGENIERIA\2do\2do Ciclo\EDII\Lab\Proyecto\UserViews - Copy\MensajeriaRelevanteSA\UsersAPI\bin\Debug\netcoreapp2.1\UsersAPI.runtimeconfig.dev.json
+D:\DOCUMENTOS\INGENIERIA\2do\2do Ciclo\EDII\Lab\Proyecto\UserViews - Copy\MensajeriaRelevanteSA\UsersAPI\bin\Debug\netcoreapp2.1\UsersAPI.dll
+D:\DOCUMENTOS\INGENIERIA\2do\2do Ciclo\EDII\Lab\Proyecto\UserViews - Copy\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.csproj.CoreCompileInputs.cache
+D:\DOCUMENTOS\INGENIERIA\2do\2do Ciclo\EDII\Lab\Proyecto\UserViews - Copy\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.RazorAssemblyInfo.cache
+D:\DOCUMENTOS\INGENIERIA\2do\2do Ciclo\EDII\Lab\Proyecto\UserViews - Copy\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.RazorAssemblyInfo.cs
+D:\DOCUMENTOS\INGENIERIA\2do\2do Ciclo\EDII\Lab\Proyecto\UserViews - Copy\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.AssemblyInfoInputs.cache
+D:\DOCUMENTOS\INGENIERIA\2do\2do Ciclo\EDII\Lab\Proyecto\UserViews - Copy\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.AssemblyInfo.cs
+D:\DOCUMENTOS\INGENIERIA\2do\2do Ciclo\EDII\Lab\Proyecto\UserViews - Copy\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.RazorTargetAssemblyInfo.cache
+D:\DOCUMENTOS\INGENIERIA\2do\2do Ciclo\EDII\Lab\Proyecto\UserViews - Copy\MensajeriaRelevanteSA\UsersAPI\bin\Debug\netcoreapp2.1\UsersAPI.pdb
+D:\DOCUMENTOS\INGENIERIA\2do\2do Ciclo\EDII\Lab\Proyecto\UserViews - Copy\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.dll
+D:\DOCUMENTOS\INGENIERIA\2do\2do Ciclo\EDII\Lab\Proyecto\UserViews - Copy\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.pdb
+D:\DOCUMENTOS\INGENIERIA\2do\2do Ciclo\EDII\Lab\Proyecto\UserViews - Copy\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.csprojAssemblyReference.cache
+C:\Users\José\Documents\Estructura De Datos II\Proyecto actual\MensajeriaRelevanteSA\UsersAPI\bin\Debug\netcoreapp2.1\UsersAPI.deps.json
+C:\Users\José\Documents\Estructura De Datos II\Proyecto actual\MensajeriaRelevanteSA\UsersAPI\bin\Debug\netcoreapp2.1\UsersAPI.runtimeconfig.json
+C:\Users\José\Documents\Estructura De Datos II\Proyecto actual\MensajeriaRelevanteSA\UsersAPI\bin\Debug\netcoreapp2.1\UsersAPI.runtimeconfig.dev.json
+C:\Users\José\Documents\Estructura De Datos II\Proyecto actual\MensajeriaRelevanteSA\UsersAPI\bin\Debug\netcoreapp2.1\UsersAPI.dll
+C:\Users\José\Documents\Estructura De Datos II\Proyecto actual\MensajeriaRelevanteSA\UsersAPI\bin\Debug\netcoreapp2.1\UsersAPI.pdb
+C:\Users\José\Documents\Estructura De Datos II\Proyecto actual\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.csprojAssemblyReference.cache
+C:\Users\José\Documents\Estructura De Datos II\Proyecto actual\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.csproj.CoreCompileInputs.cache
+C:\Users\José\Documents\Estructura De Datos II\Proyecto actual\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.RazorAssemblyInfo.cache
+C:\Users\José\Documents\Estructura De Datos II\Proyecto actual\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.RazorAssemblyInfo.cs
+C:\Users\José\Documents\Estructura De Datos II\Proyecto actual\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.AssemblyInfoInputs.cache
+C:\Users\José\Documents\Estructura De Datos II\Proyecto actual\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.AssemblyInfo.cs
+C:\Users\José\Documents\Estructura De Datos II\Proyecto actual\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.RazorTargetAssemblyInfo.cache
+C:\Users\José\Documents\Estructura De Datos II\Proyecto actual\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.dll
+C:\Users\José\Documents\Estructura De Datos II\Proyecto actual\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.pdb
+D:\DOCUMENTOS\INGENIERIA\2do\2do Ciclo\EDII\Lab\Proyecto\LoginViews\MensajeriaRelevanteSA\UsersAPI\bin\Debug\netcoreapp2.1\UsersAPI.deps.json
+D:\DOCUMENTOS\INGENIERIA\2do\2do Ciclo\EDII\Lab\Proyecto\LoginViews\MensajeriaRelevanteSA\UsersAPI\bin\Debug\netcoreapp2.1\UsersAPI.runtimeconfig.json
+D:\DOCUMENTOS\INGENIERIA\2do\2do Ciclo\EDII\Lab\Proyecto\LoginViews\MensajeriaRelevanteSA\UsersAPI\bin\Debug\netcoreapp2.1\UsersAPI.runtimeconfig.dev.json
+D:\DOCUMENTOS\INGENIERIA\2do\2do Ciclo\EDII\Lab\Proyecto\LoginViews\MensajeriaRelevanteSA\UsersAPI\bin\Debug\netcoreapp2.1\UsersAPI.dll
+D:\DOCUMENTOS\INGENIERIA\2do\2do Ciclo\EDII\Lab\Proyecto\LoginViews\MensajeriaRelevanteSA\UsersAPI\bin\Debug\netcoreapp2.1\UsersAPI.pdb
+D:\DOCUMENTOS\INGENIERIA\2do\2do Ciclo\EDII\Lab\Proyecto\LoginViews\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.csprojAssemblyReference.cache
+D:\DOCUMENTOS\INGENIERIA\2do\2do Ciclo\EDII\Lab\Proyecto\LoginViews\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.csproj.CoreCompileInputs.cache
+D:\DOCUMENTOS\INGENIERIA\2do\2do Ciclo\EDII\Lab\Proyecto\LoginViews\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.RazorAssemblyInfo.cache
+D:\DOCUMENTOS\INGENIERIA\2do\2do Ciclo\EDII\Lab\Proyecto\LoginViews\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.RazorAssemblyInfo.cs
+D:\DOCUMENTOS\INGENIERIA\2do\2do Ciclo\EDII\Lab\Proyecto\LoginViews\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.AssemblyInfoInputs.cache
+D:\DOCUMENTOS\INGENIERIA\2do\2do Ciclo\EDII\Lab\Proyecto\LoginViews\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.AssemblyInfo.cs
+D:\DOCUMENTOS\INGENIERIA\2do\2do Ciclo\EDII\Lab\Proyecto\LoginViews\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.RazorTargetAssemblyInfo.cache
+D:\DOCUMENTOS\INGENIERIA\2do\2do Ciclo\EDII\Lab\Proyecto\LoginViews\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.dll
+D:\DOCUMENTOS\INGENIERIA\2do\2do Ciclo\EDII\Lab\Proyecto\LoginViews\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.pdb
