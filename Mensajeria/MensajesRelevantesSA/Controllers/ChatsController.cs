@@ -6,53 +6,24 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using MensajesRelevantesSA.Models;
-
+using MensajesRelevantesSA.Repository;
 namespace MensajesRelevantesSA.Controllers
 {
     public class ChatsController : Controller
     {
+        private MessagesLogic messages = new MessagesLogic();
         // GET: Chats
         public ActionResult Index(string receptor)
         {
-                 ViewBag.chats = new List<string> { "José", "Eduardo", "Mario", "Estuardo", "Diana", "Marroquin",
-                 "José", "Eduardo", "Mario", "Estuardo", "Diana", "Marroquin"};
-                 ViewBag.messages = new List<MessageModel>
-                 {
-                     new MessageModel{
-                            Message = "hola",
-                            SenderReceptor = "mario|tejeda",
-                            UploadedFile = null,                           
-                            SentDate = DateTime.Now
-                         },
-
-                     new MessageModel{
-                            Message = "como vas",
-                            SenderReceptor = "tejeda|mario",
-                            UploadedFile = null,                           
-                            SentDate = DateTime.Now
-                         },
-
-                     new MessageModel{
-                            Message = "bien y vos?",
-                            SenderReceptor = "mario|tejeda",
-                            UploadedFile = null,                           
-                            SentDate = DateTime.Now
-                         },
-
-                     new MessageModel{
-                            Message = "todo bien bien",
-                            SenderReceptor = "tejeda|mario",
-                            UploadedFile = null,                           
-                            SentDate = DateTime.Now
-                         },
-
-                     new MessageModel{
-                            Message = "Me alegro papá",
-                            SenderReceptor = "mario|tejeda",
-                            UploadedFile = null,                           
-                            SentDate = DateTime.Now
-                         }
-                 } ;            
+            var messagesToShow = messages.getMessages(receptor + "|mario");
+            if (messagesToShow != null)
+            {
+                ViewBag.chats = messagesToShow;
+            }
+            else
+            {
+                ViewBag.chats = messages.getMessages("mario|"+ receptor);
+            }
                  ViewBag.receptor = receptor;
             return View();
         }

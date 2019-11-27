@@ -9,7 +9,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-
+using TextsAPI.Models;
+using TextsAPI.Services;
+using TextsAPI.Controllers;
 namespace TextsAPI
 {
     public class Startup
@@ -24,6 +26,13 @@ namespace TextsAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<MessagesDatabaseSettings>(
+            Configuration.GetSection(nameof(MessagesDatabaseSettings)));
+
+            services.AddSingleton<IMessagesDatabaseSettings>(sp =>
+            sp.GetRequiredService<IOptions<MessagesDatabaseSettings>>().Value);
+
+            services.AddSingleton<MessagesService>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
