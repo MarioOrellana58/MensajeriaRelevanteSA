@@ -45,9 +45,17 @@ namespace MensajesRelevantesSA.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreateUser(string userName, string userPassword, string userQuestion, string userAnswer)
         {
-            var operationStatusCode = User.Create(userName, userPassword, userAnswer, userQuestion);            
-            ModelState.AddModelError(string.Empty, operationStatusCode);
-            return View(User.GetQuestions());
+            var operationStatusCode = User.Create(userName, userPassword, userAnswer, userQuestion);    
+
+            if (operationStatusCode == "200")
+            {                
+                 return RedirectToAction("Index", "Chats");
+            }
+            else
+            {
+                ModelState.AddModelError(string.Empty, operationStatusCode);
+                return View(User.GetQuestions());
+            }
         }
         [HttpGet]
         public ActionResult ChangePassword()

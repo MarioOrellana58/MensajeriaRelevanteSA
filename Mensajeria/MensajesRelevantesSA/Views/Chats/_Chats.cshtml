@@ -27,13 +27,14 @@
             padding: 20px;
         }
 </style>
+
 <h6>
     <ul>
         @{
             foreach (var item in Model)
             {
                 <li>
-                    @Html.ActionLink(item, "GetChat", "Chats", new { chat = item }, null)
+                    @Html.ActionLink(item, "GetChat", "Chats", new { Receptor = item }, null)
 
                 </li>
             }

@@ -176,6 +176,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\MessageModel.cs" />
     <Compile Include="Models\SessionUserNode.cs" />
     <Compile Include="Models\UserNode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -219,6 +220,7 @@
     <Content Include="Views\Users\ChangePassword.cshtml" />
     <Content Include="Views\Chats\Index.cshtml" />
     <Content Include="Views\Chats\_Chats.cshtml" />
+    <Content Include="Views\Chats\_Conversation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
