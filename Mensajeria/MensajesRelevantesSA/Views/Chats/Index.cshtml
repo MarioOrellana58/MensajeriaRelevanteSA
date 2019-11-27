@@ -1,0 +1,18 @@
+﻿@using MensajesRelevantesSA.Models;
+
+@{
+    ViewBag.Title = "Mensajería Relevante S.A.";
+}
+
+<div style="width:1200px; height:470px; padding:3px; float:left" ;>
+    <div style="width:29%; overflow:scroll; height:447px; background:#dadada; float:left;">
+        @Html.Partial("_Chats", (List<string>)ViewBag.chats)
+    </div>
+
+    <h1>   @ViewBag.receptor</h1>
+    <div style="width:69%; overflow:scroll; height:378px; float:right;">
+        @Html.Partial("_Conversation", (List<MessageModel>)ViewBag.messages)
+    </div>
+</div>
+
+

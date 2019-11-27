@@ -45,7 +45,7 @@ namespace MensajesRelevantesSA.Repository
                 var result = postTask.Result;
                 if (result.IsSuccessStatusCode)
                 {
-                    return "200. Usuario insertado :D";
+                    return "200";
                 }
                 else
                 {
@@ -128,7 +128,7 @@ namespace MensajesRelevantesSA.Repository
                     return "Tu pregunta y o respuesta no son válidas >:(";
                 }
 
-                var updatedUser = new UserNode() { Username = userName, Password = newPassword, Question = secretQuestion, Answer = secretAnswer };
+                var updatedUser = new UserNode() { Username = searchedUser.Username, Password = newPassword, Question = searchedUser.Question, Answer = searchedUser.Answer };
 
                 var putTask = client.PutAsJsonAsync("Users/" + userName, updatedUser);
                 putTask.Wait();
@@ -175,7 +175,7 @@ namespace MensajesRelevantesSA.Repository
             {
                 //generar aqui el token
 
-                return  "Contraseña correcta :D bienvenido al sistema";
+                return  "200";
             }
 
         }

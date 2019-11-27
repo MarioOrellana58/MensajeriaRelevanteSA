@@ -1,0 +1,43 @@
+﻿@model List<string>
+
+<style>
+    ul {
+        padding: 0;
+        list-style-type: none;
+    }
+
+    li {
+        list-style-type: none;
+    }
+
+    ul li {
+        text-align: center;
+        font-size: large;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        background: #c9c9c9;
+        margin: 5px;
+        padding: 0px;
+    }
+
+        ul li a {
+            color: black;
+            display: block;
+            height: 100%;
+            width: 100%;
+            padding: 20px;
+        }
+</style>
+
+<h6>
+    <ul>
+        @{
+            foreach (var item in Model)
+            {
+                <li>
+                    @Html.ActionLink(item, "GetChat", "Chats", new { Receptor = item }, null)
+
+                </li>
+            }
+        }
+    </ul>
+</h6>
