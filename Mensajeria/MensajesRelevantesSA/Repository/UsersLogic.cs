@@ -6,6 +6,8 @@ using System.Net.Http;
 using System.Web;
 using System.Security.Cryptography;
 using System.Text;
+using Newtonsoft.Json;
+
 namespace MensajesRelevantesSA.Repository
 {
     public class UsersLogic
@@ -174,7 +176,8 @@ namespace MensajesRelevantesSA.Repository
             else
             {
                 //generar aqui el token
-
+                var jsonUser = JsonConvert.SerializeObject(searchedUser);
+                var userNode = JsonConvert.DeserializeObject<UserNode>(jsonUser);
                 return  "200";
             }
 

@@ -1,8 +1,32 @@
-﻿@using MensajesRelevantesSA.Models;
+﻿
+@using MensajesRelevantesSA.Models;
 
 @{
     ViewBag.Title = "Mensajería Relevante S.A.";
 }
+
+
+<div style="width:1200px; height:auto; padding:3px" ;>
+    <div style="width:15%; height:90px; background:#dadada; padding:3px; float:left ">
+        <form>
+            <br /><b><p id="p" align="left">Ingrese el usuario</p></b>
+            <input type="text" name="textoP" />
+        </form>
+    </div>
+    <div style="width:30%; height:90px; background:#dadada; padding:3px; float:inherit">
+        <a   href='@Url.Action("Index", "Chats")' style="display:block; padding:1px ">
+            <img src='@Url.Content("~/Images/magnifier.png")' />
+        </a>
+        <br />
+        <a href='@Url.Action("Index", "Chats")'  style="display:block; padding:1px ">
+            <img src='@Url.Content("~/Images/message.png")' />
+        </a>
+    </div>
+    <div style="width:54%; height:auto; padding:3px; float:right">
+    </div>
+
+</div>
+
 
 <div style="width:1200px; height:470px; padding:3px; float:left" ;>
     <div style="width:29%; overflow:scroll; height:447px; background:#dadada; float:left;">
