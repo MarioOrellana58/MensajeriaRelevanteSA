@@ -45,25 +45,32 @@
 <h6>
     <ul>
         @{
-            foreach (var item in Model)
+            try
             {
-                if (item.SenderReceptor.Substring(0, 5).Contains("mari"))
+                foreach (var item in Model)
                 {
-                    <li class="emisor">
-                        @item.Message
-                        @Html.ActionLink("archivo", "GetFile", "Chats", new { uploadedFile = "archivo" }, null)
-                        @item.SentDate
-                    </li>
-                }
-                else
-                {
+                    if (item.SenderReceptor.Substring(0, 5).Contains("mari"))
+                    {
+                        <li class="emisor">
+                            @item.Message
+                            @Html.ActionLink("archivo", "GetFile", "Chats", new { uploadedFile = "archivo" }, null)
+                            @item.SentDate
+                        </li>
+                    }
+                    else
+                    {
 
-                    <li class="receptor">
-                        @item.Message
-                        @Html.ActionLink("archivo", "GetFile", "Chats", new { uploadedFile = "archivo" }, null)
-                        @item.SentDate
-                    </li>
+                        <li class="receptor">
+                            @item.Message
+                            @Html.ActionLink("archivo", "GetFile", "Chats", new { uploadedFile = "archivo" }, null)
+                            @item.SentDate
+                        </li>
+                    }
                 }
+            }
+            catch (Exception)
+            {
+                <li>Error</li>
             }
         }
     </ul>

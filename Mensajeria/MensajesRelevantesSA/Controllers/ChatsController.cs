@@ -15,14 +15,21 @@ namespace MensajesRelevantesSA.Controllers
         // GET: Chats
         public ActionResult Index(string receptor)
         {
+            ViewBag.chats = new List<string>{ "José", "Eduardo", "Mario", "Estuardo", "Diana", "Marroquin",
+                 "José", "Eduardo", "Mario", "Estuardo", "Diana", "Marroquin"};
+            if (receptor == null) receptor = "tejeda";
             var messagesToShow = messages.getMessages(receptor + "|mario");
-            if (messagesToShow != null)
+            var messagesToShow2 = messages.getMessages("mario|"+ receptor);
+
+            var conversation = new List<MessageModel>();
+          
+            conversation = messagesToShow.Union(messagesToShow2).ToList();
+
+            conversation = conversation.OrderBy(message=> message.SentDate).ToList();
+
+            if (conversation != null)
             {
-                ViewBag.chats = messagesToShow;
-            }
-            else
-            {
-                ViewBag.chats = messages.getMessages("mario|"+ receptor);
+                ViewBag.messages = conversation;
             }
                  ViewBag.receptor = receptor;
             return View();

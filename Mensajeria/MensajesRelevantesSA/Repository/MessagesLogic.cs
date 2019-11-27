@@ -14,7 +14,7 @@ namespace MensajesRelevantesSA.Repository
         {
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("http://localhost:51209/api/Texts");
+                client.BaseAddress = new Uri("http://localhost:53273/api/Texts");
                 var hash256 = SHA256.Create();
 
                 var hashedBytes = hash256.ComputeHash(Encoding.Default.GetBytes(textMessage));
@@ -24,8 +24,8 @@ namespace MensajesRelevantesSA.Repository
                 {
                     SenderReceptor = senderReceptor,
                     Message = textMessage.Length!=0 ? textMessage:string.Empty,
-                    UploadedFile = file.ContentLength !=0 ? file:null ,
-                    SentDate = DateTime.Now
+                    UploadedFile = file.ContentLength !=0 ? file:null 
+ 
                 };
 
                 var postTask = client.PostAsJsonAsync("Messages", message);
@@ -67,7 +67,7 @@ namespace MensajesRelevantesSA.Repository
         {
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("http://localhost:51209/api/Texts");
+                client.BaseAddress = new Uri("http://localhost:53273/api/Texts");
                 List<MessageModel> searchedMessages = null;
                 var responseTask = client.GetAsync("Messages/" + SenderReceptor);
                 responseTask.Wait();

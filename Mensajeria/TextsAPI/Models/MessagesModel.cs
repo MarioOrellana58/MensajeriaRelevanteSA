@@ -15,7 +15,12 @@ namespace TextsAPI.Models
         [BsonElement("SenderReceptor")]
         public string SenderReceptor { get; set; }
         public string Message { get; set; }
-        public string UploadedFile { get; set; }//cambiar tipo de dato después
-        public string SentDate { get; set; }//cambiar tipo de dato después
+        public object UploadedFile { get; set; }
+        public DateTime SentDate { get; set; }
+
+        public MessagesModel()
+        {
+            SentDate = DateTime.Now;
+        }
     }
 }
