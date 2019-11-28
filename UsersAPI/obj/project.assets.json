@@ -13512,11 +13512,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\DOCUMENTOS\\INGENIERIA\\2do\\2do Ciclo\\EDII\\Lab\\Proyecto\\APIMSN\\MensajeriaRelevanteSA\\UsersAPI\\UsersAPI.csproj",
+      "projectUniqueName": "D:\\DOCUMENTOS\\INGENIERIA\\2do\\2do Ciclo\\EDII\\Lab\\Proyecto\\Busq\\MensajeriaRelevanteSA\\UsersAPI\\UsersAPI.csproj",
       "projectName": "UsersAPI",
-      "projectPath": "D:\\DOCUMENTOS\\INGENIERIA\\2do\\2do Ciclo\\EDII\\Lab\\Proyecto\\APIMSN\\MensajeriaRelevanteSA\\UsersAPI\\UsersAPI.csproj",
+      "projectPath": "D:\\DOCUMENTOS\\INGENIERIA\\2do\\2do Ciclo\\EDII\\Lab\\Proyecto\\Busq\\MensajeriaRelevanteSA\\UsersAPI\\UsersAPI.csproj",
       "packagesPath": "C:\\Users\\mario\\.nuget\\packages\\",
-      "outputPath": "D:\\DOCUMENTOS\\INGENIERIA\\2do\\2do Ciclo\\EDII\\Lab\\Proyecto\\APIMSN\\MensajeriaRelevanteSA\\UsersAPI\\obj\\",
+      "outputPath": "D:\\DOCUMENTOS\\INGENIERIA\\2do\\2do Ciclo\\EDII\\Lab\\Proyecto\\Busq\\MensajeriaRelevanteSA\\UsersAPI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -13535,8 +13535,8 @@
       "frameworks": {
         "netcoreapp2.1": {
           "projectReferences": {
-            "D:\\DOCUMENTOS\\INGENIERIA\\2do\\2do Ciclo\\EDII\\Lab\\Proyecto\\APIMSN\\MensajeriaRelevanteSA\\Mensajeria\\AlternativeProcesses\\AlternativeProcesses.csproj": {
-              "projectPath": "D:\\DOCUMENTOS\\INGENIERIA\\2do\\2do Ciclo\\EDII\\Lab\\Proyecto\\APIMSN\\MensajeriaRelevanteSA\\Mensajeria\\AlternativeProcesses\\AlternativeProcesses.csproj"
+            "D:\\DOCUMENTOS\\INGENIERIA\\2do\\2do Ciclo\\EDII\\Lab\\Proyecto\\Busq\\MensajeriaRelevanteSA\\Mensajeria\\AlternativeProcesses\\AlternativeProcesses.csproj": {
+              "projectPath": "D:\\DOCUMENTOS\\INGENIERIA\\2do\\2do Ciclo\\EDII\\Lab\\Proyecto\\Busq\\MensajeriaRelevanteSA\\Mensajeria\\AlternativeProcesses\\AlternativeProcesses.csproj"
             }
           }
         }

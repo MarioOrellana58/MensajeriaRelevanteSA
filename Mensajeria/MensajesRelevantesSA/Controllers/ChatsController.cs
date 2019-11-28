@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Web;
@@ -44,5 +45,17 @@ namespace MensajesRelevantesSA.Controllers
         {
             return RedirectToAction("Index");
         }
+
+        [HttpGet]  
+        public ActionResult NewMessage()  
+        {  
+            return View();  
+        }  
+        [HttpPost]  
+        public ActionResult NewMessage(HttpPostedFileBase file, string Receptor, string Message)  
+        {  
+
+            return View();
+        }  
     }
 }
