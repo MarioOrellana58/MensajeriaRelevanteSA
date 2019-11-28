@@ -1,8 +1,29 @@
-﻿@using MensajesRelevantesSA.Models;
+﻿
+@using MensajesRelevantesSA.Models;
 
 @{
     ViewBag.Title = "Mensajería Relevante S.A.";
 }
+
+
+<div style="width:1200px; height:auto; padding:3px" ;>
+ 
+        <div style="width:50%; height:110px; background:#dadada; padding:3px; float:inherit">
+
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" style="margin-top: 5px;">
+                <img src='@Url.Content("~/Images/message.png")' />
+            </button>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" style="margin-top: 5px;">
+                <img src='@Url.Content("~/Images/magnifier.png")' />
+            </button>
+        </div>
+        <br />
+</div>
+        <div style="width:54%; height:auto; padding:3px; float:right">
+        </div>
+
+    </div>
+
 
 <div style="width:1200px; height:470px; padding:3px; float:left" ;>
     <div style="width:29%; overflow:scroll; height:447px; background:#dadada; float:left;">
@@ -11,8 +32,60 @@
 
     <h1>   @ViewBag.receptor</h1>
     <div style="width:69%; overflow:scroll; height:378px; float:right;">
-        @Html.Partial("_Conversation", (List<MessageModel>)ViewBag.messages)
+        @{            
+            @Html.Partial("_Conversation", (List<MessageModel>)ViewBag.messages)
+        }
     </div>
 </div>
+
+
+    
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Mensaje nuevo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("NewMessage", "Chats", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <div>
+
+
+                        <form>
+                            <h4><strong>Mensaje para: <input type="text" name="Receptor" value=@ViewBag.Receptor></strong></h4>
+
+                            <textarea name="Message" rows="10" cols="30">Ingrese su mensaje...</textarea>
+                            <br>
+
+                            <div>
+                                @Html.TextBox("file", "", new { type = "file", }) <br />
+
+
+                                @ViewBag.Message
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                <input type="submit" class="btn btn-primary" value="Enviar mensaje" />
+                            </div>
+
+                        </form>
+
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+   
+
+
+
+
 
 

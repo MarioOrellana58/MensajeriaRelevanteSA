@@ -45,25 +45,34 @@
 <h6>
     <ul>
         @{
-            foreach (var item in Model)
+            if (Model != null)
             {
-                if (item.SenderReceptor.Substring(0, 5).Contains("mari"))
+                foreach (var item in Model)
                 {
-                    <li class="emisor">
-                        @item.Message
-                        @Html.ActionLink("archivo", "GetFile", "Chats", new { uploadedFile = "archivo" }, null)
-                        @item.SentDate
-                    </li>
-                }
-                else
-                {
+                    var emitterReceptor = item.SenderReceptor.Split('|');
+                    if(emitterReceptor[0].Equals(MensajesRelevantesSA.Models.SessionUserNode.getInstance.Username))
+                    {
+                        <li class="emisor">
+                            @item.Message
+                            @Html.ActionLink("archivo", "GetFile", "Chats", new { uploadedFile = "archivo" }, null)
+                            @item.SentDate
+                        </li>
+                    }
+                    else
+                    {
 
-                    <li class="receptor">
-                        @item.Message
-                        @Html.ActionLink("archivo", "GetFile", "Chats", new { uploadedFile = "archivo" }, null)
-                        @item.SentDate
-                    </li>
+                        <li class="receptor">
+                            @item.Message
+                            @Html.ActionLink("archivo", "GetFile", "Chats", new { uploadedFile = "archivo" }, null)
+                            @item.SentDate
+                        </li>
+                    }
                 }
+            }
+            else
+            {
+                <li>Seleccione una conversación</li>
+
             }
         }
     </ul>

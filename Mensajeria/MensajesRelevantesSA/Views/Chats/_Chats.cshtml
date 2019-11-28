@@ -31,12 +31,20 @@
 <h6>
     <ul>
         @{
-            foreach (var item in Model)
+            if (Model != null)
             {
-                <li>
-                    @Html.ActionLink(item, "GetChat", "Chats", new { Receptor = item }, null)
+                foreach (var item in Model)
+                {
+                    <li>
+                        @Html.ActionLink(item, "GetChat", "Chats", new { Receptor = item }, null)
 
-                </li>
+                    </li>
+                }
+            }
+            else
+            {
+                    <li>No tiene ninguna conversación, ingrese un usuario existente arriba <br/> y presione el botón de mensaje para empezar un chat</li>
+                  
             }
         }
     </ul>

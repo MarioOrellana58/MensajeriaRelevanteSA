@@ -6,6 +6,8 @@ using System.Net.Http;
 using System.Web;
 using System.Security.Cryptography;
 using System.Text;
+using Newtonsoft.Json;
+
 namespace MensajesRelevantesSA.Repository
 {
     public class UsersLogic
@@ -45,6 +47,9 @@ namespace MensajesRelevantesSA.Repository
                 var result = postTask.Result;
                 if (result.IsSuccessStatusCode)
                 {
+                    var sessionCreator = new Autentication();                
+                    var jwt = sessionCreator.GenerateJWT(userName);
+                    SessionUserNode.getInstance.SetSessionUserNodeData(userName, jwt.Result); 
                     return "200";
                 }
                 else
@@ -62,6 +67,27 @@ namespace MensajesRelevantesSA.Repository
                     {
                         return result.StatusCode.ToString() + ". Contacte a un desarrollador del sistema D:";
                     }
+                }
+            }
+        }
+
+        public bool UserExist(string userName)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://localhost:51209/api/Users");
+                UserNode searchedUser = null;
+                var responseTask = client.GetAsync("Users/" + userName);
+                responseTask.Wait();
+
+                var result = responseTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
                 }
             }
         }
@@ -173,8 +199,9 @@ namespace MensajesRelevantesSA.Repository
             }
             else
             {
-                //generar aqui el token
-
+                var sessionCreator = new Autentication();                
+                var jwt = sessionCreator.GenerateJWT(userName);
+                SessionUserNode.getInstance.SetSessionUserNodeData(userName, jwt.Result);                
                 return  "200";
             }
 

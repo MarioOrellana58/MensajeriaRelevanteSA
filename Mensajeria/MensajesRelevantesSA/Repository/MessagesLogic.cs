@@ -14,18 +14,13 @@ namespace MensajesRelevantesSA.Repository
         {
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("http://localhost:51209/api/Texts");
-                var hash256 = SHA256.Create();
-
-                var hashedBytes = hash256.ComputeHash(Encoding.Default.GetBytes(textMessage));
-                textMessage = Encoding.Default.GetString(hashedBytes);
-
+                client.BaseAddress = new Uri("http://localhost:53273/api/Texts");
+                
                 var message = new MessageModel()
                 {
                     SenderReceptor = senderReceptor,
                     Message = textMessage.Length!=0 ? textMessage:string.Empty,
-                    UploadedFile = file.ContentLength !=0 ? file:null ,
-                    SentDate = DateTime.Now
+                    UploadedFile = file                     
                 };
 
                 var postTask = client.PostAsJsonAsync("Messages", message);
@@ -67,7 +62,7 @@ namespace MensajesRelevantesSA.Repository
         {
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("http://localhost:51209/api/Texts");
+                client.BaseAddress = new Uri("http://localhost:53273/api/Texts");
                 List<MessageModel> searchedMessages = null;
                 var responseTask = client.GetAsync("Messages/" + SenderReceptor);
                 responseTask.Wait();
@@ -92,6 +87,78 @@ namespace MensajesRelevantesSA.Repository
                         return result.StatusCode.ToString() + ". Contacte a un desarrollador del sistema D:";
                     }
                 }
+            }
+        }
+
+        public List<string> getAllContacts(string emitter)
+        {
+            using (var client = new HttpClient())
+            {
+                var searchedMessages = getAllUserMessages(emitter);
+
+                if (searchedMessages.GetType().ToString() == "System.String")
+                {
+                    return null;
+                }
+
+                var contactFriends = new List<string>();
+                var IHaveAllFriends = false;
+                while (!IHaveAllFriends)
+                {
+                    if (searchedMessages.Count == 0)
+                    {
+                        IHaveAllFriends = true;
+                    }
+                    else
+                    {
+                        var actualMessage = searchedMessages[searchedMessages.Count - 1];
+                        var emitterReceptor = actualMessage.SenderReceptor.Split('|');
+                        var newFriend = string.Empty;
+                        for (int i = 0; i < 2; i++)
+                        {
+                            if (emitterReceptor[i] != emitter)
+                            {
+                                newFriend = emitterReceptor[i];
+                                break;
+                            }
+                        }
+                        searchedMessages.Remove(actualMessage);
+                        if (!contactFriends.Contains(newFriend))
+                        {
+                            contactFriends.Add(newFriend);
+                        }
+                    }
+                }
+                return contactFriends;
+            }
+        }
+
+        public List<MessageModel> loadMessages(string receptor)
+        {
+            var loggedUser = SessionUserNode.getInstance.Username;
+            
+            var loggedUserSentMessages = getMessages(loggedUser + '|' +  receptor);
+            var loggedUserReceivedMessages = getMessages(receptor + '|' +  loggedUser);
+            if (loggedUserSentMessages != null && loggedUserReceivedMessages != null)
+            {
+                var conversation = new List<MessageModel>();
+                conversation = loggedUserSentMessages.Union(loggedUserReceivedMessages).ToList();
+                conversation = conversation.OrderBy(message=> message.SentDate).ToList();
+                return conversation;
+            }
+            else if (loggedUserSentMessages != null)
+            {
+                loggedUserSentMessages = loggedUserSentMessages.OrderBy(message=> message.SentDate).ToList();
+                return loggedUserSentMessages;
+            }
+            else if (loggedUserReceivedMessages != null)
+            {
+                loggedUserReceivedMessages = loggedUserReceivedMessages.OrderBy(message=> message.SentDate).ToList();
+                return loggedUserReceivedMessages;
+            }
+            else
+            {
+                return null;
             }
         }
     }
