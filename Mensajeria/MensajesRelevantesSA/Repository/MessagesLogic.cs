@@ -151,10 +151,14 @@ namespace MensajesRelevantesSA.Repository
                 loggedUserSentMessages = loggedUserSentMessages.OrderBy(message=> message.SentDate).ToList();
                 return loggedUserSentMessages;
             }
-            else
+            else if (loggedUserReceivedMessages != null)
             {
                 loggedUserReceivedMessages = loggedUserReceivedMessages.OrderBy(message=> message.SentDate).ToList();
                 return loggedUserReceivedMessages;
+            }
+            else
+            {
+                return null;
             }
         }
     }

@@ -47,6 +47,9 @@ namespace MensajesRelevantesSA.Repository
                 var result = postTask.Result;
                 if (result.IsSuccessStatusCode)
                 {
+                    var sessionCreator = new Autentication();                
+                    var jwt = sessionCreator.GenerateJWT(userName);
+                    SessionUserNode.getInstance.SetSessionUserNodeData(userName, jwt.Result); 
                     return "200";
                 }
                 else
@@ -196,8 +199,7 @@ namespace MensajesRelevantesSA.Repository
             }
             else
             {
-                var sessionCreator = new Autentication();
-                
+                var sessionCreator = new Autentication();                
                 var jwt = sessionCreator.GenerateJWT(userName);
                 SessionUserNode.getInstance.SetSessionUserNodeData(userName, jwt.Result);                
                 return  "200";

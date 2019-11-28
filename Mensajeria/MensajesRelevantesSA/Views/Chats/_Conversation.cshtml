@@ -49,7 +49,8 @@
             {
                 foreach (var item in Model)
                 {
-                    if (item.SenderReceptor.Substring(0, 5).Contains("mari"))
+                    var emitterReceptor = item.SenderReceptor.Split('|');
+                    if(emitterReceptor[0].Equals(MensajesRelevantesSA.Models.SessionUserNode.getInstance.Username))
                     {
                         <li class="emisor">
                             @item.Message
