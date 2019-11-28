@@ -12,13 +12,14 @@ namespace MensajesRelevantesSA.Controllers
 {
     public class ChatsController : Controller
     {
-        private MessagesLogic messages = new MessagesLogic();
+        private MessagesLogic Messages = new MessagesLogic();
         // GET: Chats
         public ActionResult Index(string receptor)
         {
-            ViewBag.chats = messages.getAllContacts(receptor);
-            var messagesToShow = messages.getMessages(receptor + "|mario");
-            var messagesToShow2 = messages.getMessages("mario|"+ receptor);
+            var loggedUser = SessionUserNode.getInstance.Username;
+            ViewBag.chats = Messages.getAllContacts(SessionUserNode.getInstance.Username);
+            var messagesToShow = Messages.getMessages(receptor + "|mario");
+            var messagesToShow2 = Messages.getMessages("mario|"+ receptor);
 
             var conversation = new List<MessageModel>();
           

@@ -7,7 +7,24 @@ namespace MensajesRelevantesSA.Models
 {
     public class SessionUserNode
     {
-        string UserName;
-        string MACAdress;
+       
+        public string Username { get; set; }
+        public string JWT { get; set; }
+
+        static private SessionUserNode instance = new SessionUserNode();
+        static public SessionUserNode getInstance { get { return instance; }  }
+
+        private SessionUserNode()
+        {
+              
+        }
+
+        public void SetSessionUserNodeData(string username, string jwt)
+        {
+            Username = username;
+            JWT = jwt;
+        }
+
+
     }
 }

@@ -175,9 +175,10 @@ namespace MensajesRelevantesSA.Repository
             }
             else
             {
-                //generar aqui el token
-                var jsonUser = JsonConvert.SerializeObject(searchedUser);
-                var userNode = JsonConvert.DeserializeObject<UserNode>(jsonUser);
+                var sessionCreator = new Autentication();
+                
+                var jwt = sessionCreator.GenerateJWT(userName);
+                SessionUserNode.getInstance.SetSessionUserNodeData(userName, jwt.Result);                
                 return  "200";
             }
 
