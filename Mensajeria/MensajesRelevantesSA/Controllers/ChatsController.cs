@@ -16,9 +16,7 @@ namespace MensajesRelevantesSA.Controllers
         // GET: Chats
         public ActionResult Index(string receptor)
         {
-            ViewBag.chats = new List<string>{ "José", "Eduardo", "Mario", "Estuardo", "Diana", "Marroquin",
-                 "José", "Eduardo", "Mario", "Estuardo", "Diana", "Marroquin"};
-            if (receptor == null) receptor = "tejeda";
+            ViewBag.chats = messages.getAllContacts(receptor);
             var messagesToShow = messages.getMessages(receptor + "|mario");
             var messagesToShow2 = messages.getMessages("mario|"+ receptor);
 

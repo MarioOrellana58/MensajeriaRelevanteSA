@@ -15,11 +15,7 @@ namespace MensajesRelevantesSA.Repository
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri("http://localhost:53273/api/Texts");
-                var hash256 = SHA256.Create();
-
-                var hashedBytes = hash256.ComputeHash(Encoding.Default.GetBytes(textMessage));
-                textMessage = Encoding.Default.GetString(hashedBytes);
-
+                
                 var message = new MessageModel()
                 {
                     SenderReceptor = senderReceptor,
@@ -92,6 +88,49 @@ namespace MensajesRelevantesSA.Repository
                         return result.StatusCode.ToString() + ". Contacte a un desarrollador del sistema D:";
                     }
                 }
+            }
+        }
+
+        public List<string> getAllContacts(string emitter)
+        {
+            using (var client = new HttpClient())
+            {
+                var searchedMessages = getAllUserMessages(emitter);
+
+                if (searchedMessages.GetType().ToString() == "System.String")
+                {
+                    return null;
+                }
+
+                var contactFriends = new List<string>();
+                var IHaveAllFriends = false;
+                while (!IHaveAllFriends)
+                {
+                    if (searchedMessages.Count == 0)
+                    {
+                        IHaveAllFriends = true;
+                    }
+                    else
+                    {
+                        var actualMessage = searchedMessages[searchedMessages.Count - 1];
+                        var emitterReceptor = actualMessage.SenderReceptor.Split('|');
+                        var newFriend = string.Empty;
+                        for (int i = 0; i < emitterReceptor.length(); i++)
+                        {
+                            if (emitterReceptor[i] != emitter)
+                            {
+                                newFriend = emitterReceptor[i];
+                                break;
+                            }
+                        }
+                        searchedMessages.Remove(actualMessage);
+                        if (!contactFriends.Contains(newFriend))
+                        {
+                            contactFriends.Add(newFriend);
+                        }
+                    }
+                }
+                return contactFriends;
             }
         }
     }

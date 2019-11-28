@@ -29,7 +29,12 @@ namespace TextsAPI.Controllers
             {
                 return StatusCode(404, "No existen mensajes");
             }
-            // messages.Sort(); sortear por fecha
+            var decipherMessages = new SDES();
+            for (int i = 0; i < messages.Count; i++)
+            {
+                messages[i].Message = decipherMessages.DecipherText(messages[i].Message);
+            }
+
             return messages;
         }
 
@@ -38,6 +43,8 @@ namespace TextsAPI.Controllers
         {
             try
             {
+                var cipherMessage = new SDES();
+                message.Message = cipherMessage.CipherText(message.Message);
                 _messagesService.Create(message);
                 return StatusCode(200, "Su mensaje se envió con exito");
             }
