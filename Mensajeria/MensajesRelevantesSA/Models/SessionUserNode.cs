@@ -10,6 +10,7 @@ namespace MensajesRelevantesSA.Models
        
         public string Username { get; set; }
         public string JWT { get; set; }
+        
 
         static private SessionUserNode instance = new SessionUserNode();
         static public SessionUserNode getInstance { get { return instance; }  }

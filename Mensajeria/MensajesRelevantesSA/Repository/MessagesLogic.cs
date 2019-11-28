@@ -20,8 +20,7 @@ namespace MensajesRelevantesSA.Repository
                 {
                     SenderReceptor = senderReceptor,
                     Message = textMessage.Length!=0 ? textMessage:string.Empty,
-                    UploadedFile = file.ContentLength !=0 ? file:null 
- 
+                    UploadedFile = file                     
                 };
 
                 var postTask = client.PostAsJsonAsync("Messages", message);
@@ -115,7 +114,7 @@ namespace MensajesRelevantesSA.Repository
                         var actualMessage = searchedMessages[searchedMessages.Count - 1];
                         var emitterReceptor = actualMessage.SenderReceptor.Split('|');
                         var newFriend = string.Empty;
-                        for (int i = 0; i < emitterReceptor.length(); i++)
+                        for (int i = 0; i < 2; i++)
                         {
                             if (emitterReceptor[i] != emitter)
                             {
@@ -131,6 +130,31 @@ namespace MensajesRelevantesSA.Repository
                     }
                 }
                 return contactFriends;
+            }
+        }
+
+        public List<MessageModel> loadMessages(string receptor)
+        {
+            var loggedUser = SessionUserNode.getInstance.Username;
+            
+            var loggedUserSentMessages = getMessages(loggedUser + '|' +  receptor);
+            var loggedUserReceivedMessages = getMessages(receptor + '|' +  loggedUser);
+            if (loggedUserSentMessages != null && loggedUserReceivedMessages != null)
+            {
+                var conversation = new List<MessageModel>();
+                conversation = loggedUserSentMessages.Union(loggedUserReceivedMessages).ToList();
+                conversation = conversation.OrderBy(message=> message.SentDate).ToList();
+                return conversation;
+            }
+            else if (loggedUserSentMessages != null)
+            {
+                loggedUserSentMessages = loggedUserSentMessages.OrderBy(message=> message.SentDate).ToList();
+                return loggedUserSentMessages;
+            }
+            else
+            {
+                loggedUserReceivedMessages = loggedUserReceivedMessages.OrderBy(message=> message.SentDate).ToList();
+                return loggedUserReceivedMessages;
             }
         }
     }

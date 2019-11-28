@@ -45,7 +45,7 @@
 <h6>
     <ul>
         @{
-            try
+            if (Model != null)
             {
                 foreach (var item in Model)
                 {
@@ -68,9 +68,10 @@
                     }
                 }
             }
-            catch (Exception)
+            else
             {
-                <li>Error</li>
+                <li>Seleccione una conversación</li>
+
             }
         }
     </ul>

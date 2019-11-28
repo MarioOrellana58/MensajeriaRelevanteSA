@@ -68,6 +68,27 @@ namespace MensajesRelevantesSA.Repository
             }
         }
 
+        public bool UserExist(string userName)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://localhost:51209/api/Users");
+                UserNode searchedUser = null;
+                var responseTask = client.GetAsync("Users/" + userName);
+                responseTask.Wait();
+
+                var result = responseTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+
         dynamic getUserByUsername(string userName)
         {
             using (var client = new HttpClient())
