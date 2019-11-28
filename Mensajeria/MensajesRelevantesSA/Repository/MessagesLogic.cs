@@ -15,7 +15,7 @@ namespace MensajesRelevantesSA.Repository
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri("http://localhost:53273/api/Texts");
-                
+
                 var message = new MessageModel()
                 {
                     SenderReceptor = senderReceptor,
