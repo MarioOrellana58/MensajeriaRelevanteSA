@@ -18,16 +18,26 @@ namespace MensajesRelevantesSA.Controllers
         // GET: Chats
         public ActionResult Index(string receptor)
         {
+            
             ViewBag.chats = Messages.getAllContacts(LoggedUser);
-            var messagesToShow = new List<MessageModel>();
-            messagesToShow = Messages.loadMessages(receptor);
-            if (messagesToShow != null)
-            {
-                ViewBag.messages = messagesToShow;
-            }
+            
+
             if (receptor != null)
             {
-                ViewBag.receptor = receptor;
+                var messagesToShow = new List<MessageModel>();
+                messagesToShow = Messages.loadMessages(receptor);
+                if (messagesToShow != null)
+                {
+                    ViewBag.messages = messagesToShow;
+                }
+                if (receptor != "404")
+                {
+                    ViewBag.receptor = receptor;
+                }
+                else
+                {
+                    ViewBag.Error = "El usuario a quien intentas enviar un mensaje no existe";
+                }
             }
                  
             return View();
@@ -51,8 +61,16 @@ namespace MensajesRelevantesSA.Controllers
         [HttpPost]  
         public ActionResult NewMessage(HttpPostedFileBase file, string Receptor, string Message)  
         {
-            Messages.Create(LoggedUser + '|' +  Receptor, Message, file);
-            return RedirectToAction("Index",  new {receptor = Receptor});
+            var user =  new UsersLogic();
+            if (user.UserExist(Receptor))
+            {                
+                Messages.Create(LoggedUser + '|' +  Receptor, Message, file);
+                return RedirectToAction("Index",  new {receptor = Receptor});
+            }
+            else
+            {
+                 return RedirectToAction("Index",  new {receptor = "404"});
+            }
         }  
     }
 }

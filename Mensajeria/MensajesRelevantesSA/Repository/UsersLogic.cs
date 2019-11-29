@@ -7,6 +7,7 @@ using System.Web;
 using System.Security.Cryptography;
 using System.Text;
 using Newtonsoft.Json;
+using AlternativeProcesses;
 
 namespace MensajesRelevantesSA.Repository
 {
@@ -39,7 +40,16 @@ namespace MensajesRelevantesSA.Repository
                 hashedBytes = hash256.ComputeHash(Encoding.Default.GetBytes(userQuestion));
                 userQuestion = Encoding.Default.GetString(hashedBytes);
 
-                var user = new UserNode() { Username = userName, Password = userPassword, Answer = userAnswer, Question = userQuestion};
+                var rand = new Random();
+                int privateKey = rand.Next(10,30);//ir a validar que el random sea único user
+                
+                
+                SDES cipher = new SDES();
+                userPassword = cipher.CipherText(userPassword, "1110010011");
+                 userAnswer = cipher.CipherText(userAnswer, "1110010011");
+                 userQuestion = cipher.CipherText(userQuestion, "1110010011");
+
+                var user = new UserNode() { Username = userName, Password = userPassword, Answer = userAnswer, Question = userQuestion, PrivateKey = privateKey};
 
                 var postTask = client.PostAsJsonAsync("Users", user);
                 postTask.Wait();
@@ -49,7 +59,7 @@ namespace MensajesRelevantesSA.Repository
                 {
                     var sessionCreator = new Autentication();                
                     var jwt = sessionCreator.GenerateJWT(userName);
-                    SessionUserNode.getInstance.SetSessionUserNodeData(userName, jwt.Result); 
+                    SessionUserNode.getInstance.SetSessionUserNodeData(userName, jwt.Result, privateKey); 
                     return "200";
                 }
                 else
@@ -76,7 +86,6 @@ namespace MensajesRelevantesSA.Repository
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri("http://localhost:51209/api/Users");
-                UserNode searchedUser = null;
                 var responseTask = client.GetAsync("Users/" + userName);
                 responseTask.Wait();
 
@@ -92,7 +101,7 @@ namespace MensajesRelevantesSA.Repository
             }
         }
 
-        dynamic getUserByUsername(string userName)
+        public dynamic getUserByUsername(string userName)
         {
             using (var client = new HttpClient())
             {
@@ -135,7 +144,6 @@ namespace MensajesRelevantesSA.Repository
                 {
                     return searchedUser;
                 }
-
                 client.BaseAddress = new Uri("http://localhost:51209/api/Users");
 
                 var hash256 = SHA256.Create();
@@ -149,12 +157,18 @@ namespace MensajesRelevantesSA.Repository
                 hashedBytes = hash256.ComputeHash(Encoding.Default.GetBytes(secretQuestion));
                 secretQuestion = Encoding.Default.GetString(hashedBytes);
 
+                
+                SDES cipher = new SDES();
+                secretQuestion = cipher.CipherText(secretQuestion, "1110010011");
+                 secretAnswer = cipher.CipherText(secretAnswer, "1110010011");
+                 newPassword = cipher.CipherText(newPassword, "1110010011");
+
                 if (searchedUser.Question != secretQuestion || searchedUser.Answer != secretAnswer)
                 {
                     return "Tu pregunta y o respuesta no son válidas >:(";
                 }
 
-                var updatedUser = new UserNode() { Username = searchedUser.Username, Password = newPassword, Question = searchedUser.Question, Answer = searchedUser.Answer };
+                var updatedUser = new UserNode() { Username = searchedUser.Username, Password = newPassword, Question = searchedUser.Question, Answer = searchedUser.Answer, PrivateKey = searchedUser.PrivateKey};
 
                 var putTask = client.PutAsJsonAsync("Users/" + userName, updatedUser);
                 putTask.Wait();
@@ -192,16 +206,18 @@ namespace MensajesRelevantesSA.Repository
 
             var hashedBytes = hash256.ComputeHash(Encoding.Default.GetBytes(password));
             password = Encoding.Default.GetString(hashedBytes);
-
+            
+               SDES cipher = new SDES();
+                password = cipher.CipherText(password, "1110010011");
             if (searchedUser.Password != password)
             {
                 return "Tu contraseña es incorrecta :(";
             }
             else
-            {
+            {                
                 var sessionCreator = new Autentication();                
                 var jwt = sessionCreator.GenerateJWT(userName);
-                SessionUserNode.getInstance.SetSessionUserNodeData(userName, jwt.Result);                
+                SessionUserNode.getInstance.SetSessionUserNodeData(userName, jwt.Result, searchedUser.PrivateKey);               
                 return  "200";
             }
 

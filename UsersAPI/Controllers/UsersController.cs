@@ -31,11 +31,6 @@ namespace UsersAPI.Controllers
             {
                 return StatusCode(404, "Your user does not exist");
             }
-            var dechipherData = new SDES();
-
-            user.Password = dechipherData.DecipherText(user.Password);
-            user.Question = dechipherData.DecipherText(user.Question);
-            user.Answer = dechipherData.DecipherText(user.Answer);
 
             return user;
         }
@@ -49,11 +44,6 @@ namespace UsersAPI.Controllers
             {
                 return StatusCode(409, "That username already exists :( try another one");
             }
-            var cipherData = new SDES();
-
-            user.Password = cipherData.CipherText(user.Password);
-            user.Question = cipherData.CipherText(user.Question);
-            user.Answer = cipherData.CipherText(user.Answer);
 
             _userService.Create(user);
 
@@ -68,8 +58,6 @@ namespace UsersAPI.Controllers
             {
                 return NotFound();
             }
-            var cipherData = new SDES();
-            userIn.Password = cipherData.CipherText(userIn.Password);
             userIn.Id = user.Id;
             _userService.Update(username, userIn);
 

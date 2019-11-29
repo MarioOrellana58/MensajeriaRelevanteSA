@@ -17,6 +17,7 @@ namespace TextsAPI.Models
         public string Message { get; set; }
         public object UploadedFile { get; set; }
         public DateTime SentDate { get; set; }
+        public int PublicKey { get; set; }
 
         public MessagesModel()
         {

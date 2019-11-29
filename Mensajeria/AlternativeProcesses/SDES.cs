@@ -33,9 +33,8 @@ namespace AlternativeProcesses
             }
         }
 
-        public string CipherText(string inputString)
+        public string CipherText(string inputString, string key)
         {
-            var key = "1000110101";
             key = fillKey(key);
             LoadPermutation();
             key = fillKey(key);
@@ -53,9 +52,8 @@ namespace AlternativeProcesses
             
             return outputText;
         }
-        public string DecipherText(string inputString)
+        public string DecipherText(string inputString, string key)
         {
-            var key = "1000110101";
             key = fillKey(key);
             LoadPermutation();
             key = fillKey(key);
