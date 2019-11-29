@@ -73,5 +73,11 @@ namespace MensajesRelevantesSA.Repository
             return Task.FromResult(claimsIdentity);
         }
 
+        public bool ValidateSession(string jwt)
+        {
+
+            return false;
+        }
+
     }
 }

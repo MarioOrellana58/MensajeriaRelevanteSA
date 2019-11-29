@@ -352,6 +352,7 @@
     <Content Include="Views\Chats\Index.cshtml" />
     <Content Include="Views\Chats\_Chats.cshtml" />
     <Content Include="Views\Chats\_Conversation.cshtml" />
+    <Content Include="Views\Chats\Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
