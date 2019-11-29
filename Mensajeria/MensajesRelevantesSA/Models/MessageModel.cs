@@ -10,8 +10,9 @@ namespace MensajesRelevantesSA.Models
     {
         public string SenderReceptor { get; set; }
         public string  Message { get; set; }
-        public HttpPostedFileBase UploadedFile { get; set; }
+        public string UploadedFile { get; set; }
         public DateTime SentDate { get; set; }
+        public int PublicKey { get; set; }
 
         public MessageModel()
         {            

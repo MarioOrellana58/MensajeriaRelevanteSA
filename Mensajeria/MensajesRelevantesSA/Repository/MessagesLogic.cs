@@ -6,21 +6,51 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Net.Http;
 using MensajesRelevantesSA.Models;
+using AlternativeProcesses;
+using System.Numerics;
+using AlternativeProcesses.CompressComponents;
 namespace MensajesRelevantesSA.Repository
 {
     public class MessagesLogic
     {
+        private int p = 11;
+        private int g = 3;
+
         public string Create(string senderReceptor, string textMessage, HttpPostedFileBase file)
         {
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri("http://localhost:53273/api/Texts");
-                
+                if (textMessage.Equals(string.Empty) && file == null)
+                {
+                    return "No puede enviar mensajes vacios";
+                }
+                if (textMessage != string.Empty)
+                {
+                    var cipher = new SDES();
+                    var getUser = new UsersLogic();
+
+                    var receptor = senderReceptor.Split('|');
+                   
+                    var a = getUser.getUserByUsername(receptor[1]).PrivateKey;
+                    var receptorKey = (Math.Pow(g,a)%p) ;
+                    
+                    var key = BigInteger.ModPow((int)receptorKey,SessionUserNode.getInstance.PrivateKey,p);
+                    var cipherKey = Convert.ToString(((int)key),2);
+
+                     textMessage =  cipher.CipherText(textMessage, cipherKey);
+                }
+                else
+                {
+                    textMessage = string.Empty;
+                }
+                var compressFile = new CompresssDecompressActions();
                 var message = new MessageModel()
                 {
                     SenderReceptor = senderReceptor,
-                    Message = textMessage.Length!=0 ? textMessage:string.Empty,
-                    UploadedFile = file                     
+                    Message = textMessage,
+                    UploadedFile = file!=null ? compressFile.generateCharactersList(file):"",
+                    PublicKey = (int)(Math.Pow(g, SessionUserNode.getInstance.PrivateKey)%p)
                 };
 
                 var postTask = client.PostAsJsonAsync("Messages", message);
@@ -54,6 +84,39 @@ namespace MensajesRelevantesSA.Repository
                 {
                     return null;
                 }
+
+                var decipheredMessages = new List<MessageModel>();
+                var decipherMessage = new SDES();
+                var decompressFileMessage = new CompresssDecompressActions();
+                var getUser = new UsersLogic();
+                                    var receptor = SenderReceptor.Split('|');
+                if (receptor[1] == string.Empty)
+                {
+                    return searchedMessages;
+                }
+                if (receptor[0] == SessionUserNode.getInstance.Username)
+                {//es un mensaje que yo envié
+                    var a = getUser.getUserByUsername(receptor[1]).PrivateKey;
+                    foreach (var message in searchedMessages)
+                    {                    
+                        var key = BigInteger.ModPow((int)message.PublicKey,a,p);
+                        var commonKey = Convert.ToString((int)key,2);
+                        message.Message = message.Message != string.Empty ? decipherMessage.DecipherText(message.Message, commonKey) : string.Empty;
+                        decipheredMessages.Add(message);                    
+                    }           
+                }
+                else
+                {//es un mensaje recibido
+                    foreach (var message in searchedMessages)
+                    {                    
+                        var key = BigInteger.ModPow((int)message.PublicKey,SessionUserNode.getInstance.PrivateKey,p);
+                        var commonKey = Convert.ToString((int)key,2);
+                        message.Message = message.Message != string.Empty ? decipherMessage.DecipherText(message.Message, commonKey) : string.Empty;
+                        decipheredMessages.Add(message);                    
+                    }  
+                }
+                         
+                     
 
                 return searchedMessages;
             }
@@ -159,6 +222,36 @@ namespace MensajesRelevantesSA.Repository
             else
             {
                 return null;
+            }
+        }
+        public string DecompressSelectedFile(string senderReceptor, DateTime sentDate)
+        {
+            using (var client = new HttpClient())
+            {
+                
+                client.BaseAddress = new Uri("http://localhost:53273/api/Texts");
+                var responseTask = client.GetAsync("Messages/" + senderReceptor);
+                responseTask.Wait();
+                var result = responseTask.Result;
+                var FilePath = string.Empty;
+                if (result.IsSuccessStatusCode)
+                {
+                    var decompression = new CompresssDecompressActions();
+                    List<MessageModel> FileMessage = null;
+                    var readTask = result.Content.ReadAsAsync<List<MessageModel>>();
+                    readTask.Wait();
+                    FileMessage = readTask.Result;
+                    foreach (var item in FileMessage)
+                    {
+                        if (item.SentDate.ToString() == sentDate.ToString())
+                        {
+
+                            FilePath = decompression.DescomprimirArchivo(item.UploadedFile);
+                            break;
+                        }
+                    }
+                }
+                return FilePath;
             }
         }
     }

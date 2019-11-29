@@ -16,12 +16,12 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <p align="center">Ingrese su nombre de usuario</p>
-                <p align="center"><input type="text" name="userName" maxlength="50" required="required" /></p>
+                <p align="center"><input type="text" name="userName" maxlength="50" required="required" class="form-control pwd"/></p>
             </div>
             <div class="col-md-offset-2 col-md-10">
                 <p align="center">Ingrese su contraseña</p>
                 <h6 align="center">(debe contener como mínimo un número, una letra mayúscula, una minúscula y 8 caracteres)</h6>
-                <p align="center"><input type="text" name="userPassword" maxlength="50" required="required" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" /></p>
+                <p align="center"><input type="text" name="userPassword" maxlength="50" required="required" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" class="form-control pwd"/></p>
             </div>
             <div class="col-md-offset-2 col-md-10">
                 <p align="center">Elija su pregunta</p>
@@ -33,7 +33,7 @@ new { @class = "form-control", placeholder = "short name", required = "required"
         </div>
         <div class="col-md-offset-2 col-md-10">
             <p align="center">Ingrese su respuesta</p>
-            <p align="center"><input type="text" name="userAnswer" maxlength="50" required="required" /></p>
+            <p align="center"><input type="text" name="userAnswer" maxlength="50" required="required" class="form-control pwd"/></p>
         </div>
         <div class="col-md-offset-2 col-md-10">
             <p align="center"><input type="submit" value="Crear usuario" class="btn btn-default" /></p>

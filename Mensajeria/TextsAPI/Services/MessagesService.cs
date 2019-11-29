@@ -34,5 +34,8 @@ namespace TextsAPI.Services
 
         public void Remove(string id) =>
             _messages.DeleteOne(message => message.Id == id);
+
+        public MessagesModel GetFile(string emitterReceptor, DateTime sentDate) =>
+            _messages.Find(message => message.SenderReceptor.Contains(emitterReceptor) && message.SentDate == sentDate ).FirstOrDefault();
     }
 }
