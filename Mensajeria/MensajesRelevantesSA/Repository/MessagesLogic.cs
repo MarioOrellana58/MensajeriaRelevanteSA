@@ -86,8 +86,9 @@ namespace MensajesRelevantesSA.Repository
                 }
 
                 var decipheredMessages = new List<MessageModel>();
-                    var decipherMessage = new SDES();
-                    var getUser = new UsersLogic();
+                var decipherMessage = new SDES();
+                var decompressFileMessage = new CompresssDecompressActions();
+                var getUser = new UsersLogic();
                                     var receptor = SenderReceptor.Split('|');
                 if (receptor[1] == string.Empty)
                 {
@@ -223,11 +224,35 @@ namespace MensajesRelevantesSA.Repository
                 return null;
             }
         }
-        public string DecompressSelectedFile(string fileData)
+        public string DecompressSelectedFile(string senderReceptor, DateTime sentDate)
         {
-            var decompression = new CompresssDecompressActions();
-            decompression.DescomprimirArchivo(fileData);
-            return "";
+            using (var client = new HttpClient())
+            {
+                
+                client.BaseAddress = new Uri("http://localhost:53273/api/Texts");
+                var responseTask = client.GetAsync("Messages/" + senderReceptor);
+                responseTask.Wait();
+                var result = responseTask.Result;
+                var FilePath = string.Empty;
+                if (result.IsSuccessStatusCode)
+                {
+                    var decompression = new CompresssDecompressActions();
+                    List<MessageModel> FileMessage = null;
+                    var readTask = result.Content.ReadAsAsync<List<MessageModel>>();
+                    readTask.Wait();
+                    FileMessage = readTask.Result;
+                    foreach (var item in FileMessage)
+                    {
+                        if (item.SentDate.ToString() == sentDate.ToString())
+                        {
+
+                            FilePath = decompression.DescomprimirArchivo(item.UploadedFile);
+                            break;
+                        }
+                    }
+                }
+                return FilePath;
+            }
         }
     }
 }

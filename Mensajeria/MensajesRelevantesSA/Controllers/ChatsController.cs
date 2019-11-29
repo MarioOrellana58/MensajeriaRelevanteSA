@@ -50,8 +50,7 @@ namespace MensajesRelevantesSA.Controllers
 
         public ActionResult GetFile(string senderReceptor, DateTime sentDate)
         {
-            //buscar mensaje por datos recibidos y descomprimir
-           // Messages.DecompressSelectedFile(uploadedFile[0]);
+            var filePath = Messages.DecompressSelectedFile(senderReceptor, sentDate);
             return RedirectToAction("Index");
         }
 

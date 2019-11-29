@@ -102,7 +102,7 @@ namespace AlternativeProcesses.CompressComponents
             return textoResultadoCompresion;
         }
 
-        public void DescomprimirArchivo(string fileData)
+        public string DescomprimirArchivo(string fileData)
         {
             var charactersOfFileName = fileData.IndexOf('|', 0);
             var nameOfFile = fileData.Substring(0, charactersOfFileName);
@@ -353,6 +353,7 @@ namespace AlternativeProcesses.CompressComponents
 
                 return codPrefijo;
             }
+            return path2;
         }
 
     }
