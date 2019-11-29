@@ -45,25 +45,37 @@
 <h6>
     <ul>
         @{
-            if (Model != null)
-            {
-                foreach (var item in Model)
-                {
-                    var emitterReceptor = item.SenderReceptor.Split('|');
-                    if(emitterReceptor[0].Equals(MensajesRelevantesSA.Models.SessionUserNode.getInstance.Username))
-                    {
-                        <li class="emisor">
-                            @item.Message
-                            @Html.ActionLink("archivo", "GetFile", "Chats", new { uploadedFile = "archivo" }, null)
-                            @item.SentDate
-                        </li>
+			if (Model != null)
+			{
+				foreach (var item in Model)
+				{
+					var emitterReceptor = item.SenderReceptor.Split('|');
+					var fileArray = new string[1];
+					if (item.UploadedFile != null)
+					{						
+						fileArray = item.UploadedFile.Split('|') ;
+					}
+					else
+					{
+						fileArray[0] = "no hay archivo";
+					}
+
+					if (emitterReceptor[0].Equals(MensajesRelevantesSA.Models.SessionUserNode.getInstance.Username))
+					{
+
+						<li class="emisor">
+							@item.Message
+							
+							@Html.ActionLink((string)fileArray[0], "GetFile", "Chats", new { uploadedFile = item.UploadedFile }, null)
+							@item.SentDate
+						</li>
                     }
                     else
                     {
 
                         <li class="receptor">
                             @item.Message
-                            @Html.ActionLink("archivo", "GetFile", "Chats", new { uploadedFile = "archivo" }, null)
+                            @Html.ActionLink((string)fileArray[0], "GetFile", "Chats", new { uploadedFile = item.UploadedFile }, null)
                             @item.SentDate
                         </li>
                     }

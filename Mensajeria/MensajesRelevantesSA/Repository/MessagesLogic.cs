@@ -8,7 +8,7 @@ using System.Net.Http;
 using MensajesRelevantesSA.Models;
 using AlternativeProcesses;
 using System.Numerics;
-
+using AlternativeProcesses.CompressComponents;
 namespace MensajesRelevantesSA.Repository
 {
     public class MessagesLogic
@@ -40,12 +40,12 @@ namespace MensajesRelevantesSA.Repository
                 {
                     textMessage = string.Empty;
                 }
-
+                var compressFile = new CompresssDecompressActions();
                 var message = new MessageModel()
                 {
                     SenderReceptor = senderReceptor,
                     Message = textMessage,
-                    UploadedFile = file,
+                    UploadedFile = file!=null ? compressFile.generateCharactersList(file):"",
                     PublicKey = (int)(Math.Pow(g, SessionUserNode.getInstance.PrivateKey)%p)
                 };
 
@@ -218,6 +218,12 @@ namespace MensajesRelevantesSA.Repository
             {
                 return null;
             }
+        }
+        public string DecompressSelectedFile(string fileData)
+        {
+            var decompression = new CompresssDecompressActions();
+            decompression.DescomprimirArchivo(fileData);
+            return "";
         }
     }
 }

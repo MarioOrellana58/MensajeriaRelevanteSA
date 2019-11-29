@@ -8,10 +8,10 @@ using System.Web;
 
 namespace AlternativeProcesses.CompressComponents
 {
-    class CompresssDecompressActions
+    public class CompresssDecompressActions
     {
         private Huffman HuffmanAlgorithm = new Huffman();
-        public void generateCharactersList(HttpPostedFileBase file)
+        public string generateCharactersList(HttpPostedFileBase file)
         {
             var bufferLength = file.ContentLength;
 
@@ -54,7 +54,7 @@ namespace AlternativeProcesses.CompressComponents
             {
                 charactersList[i].probabilidad = Convert.ToDouble(charactersList[i].frecuencia) / Convert.ToDouble(amountOfCharacters);
             }
-            ComprimirArchivo(charactersList, ms, file.FileName, bufferLength);
+            return ComprimirArchivo(charactersList, ms, file.FileName, bufferLength);
         }
 
         public string ComprimirArchivo(List<initialReadComponents> listaDeCaracteres, Stream archivo, string nombreArchivo, int buffLength)
@@ -74,7 +74,7 @@ namespace AlternativeProcesses.CompressComponents
             var bufferLength = Convert.ToInt64(archivo.Length);
             var path = Path.Combine(HttpContext.Current.Server.MapPath("~/UploadedFiles"), nombreArchivo);
             var textoResultadoCompresion = string.Empty;
-            textoResultadoCompresion += nombreArchivo;
+            textoResultadoCompresion += (nombreArchivo+ "|");
             using (var reader = new BinaryReader(archivo))
             {
                 using (var writeStream = new FileStream(path, FileMode.OpenOrCreate))
@@ -107,7 +107,7 @@ namespace AlternativeProcesses.CompressComponents
             var charactersOfFileName = fileData.IndexOf('|', 0);
             var nameOfFile = fileData.Substring(0, charactersOfFileName);
             fileData = fileData.Remove(0, charactersOfFileName + 1);
-            var path2 = Path.Combine(HttpContext.Current.Server.MapPath("~/UploadedFiles"), fileData);
+            var path2 = Path.Combine(HttpContext.Current.Server.MapPath("~/UploadedFiles"), nameOfFile);
             using (var writeStream = new FileStream(path2, FileMode.OpenOrCreate))
             {
                 using (var writer = new BinaryWriter(writeStream))

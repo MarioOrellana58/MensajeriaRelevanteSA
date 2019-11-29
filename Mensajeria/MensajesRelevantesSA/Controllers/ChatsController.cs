@@ -50,6 +50,7 @@ namespace MensajesRelevantesSA.Controllers
 
         public ActionResult GetFile(string uploadedFile)
         {
+            Messages.DecompressSelectedFile(uploadedFile);
             return RedirectToAction("Index");
         }
 

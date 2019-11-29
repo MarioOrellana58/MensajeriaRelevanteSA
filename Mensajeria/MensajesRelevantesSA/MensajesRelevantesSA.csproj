@@ -354,6 +354,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="TempFiles\" />
+    <Folder Include="UploadedFiles\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
