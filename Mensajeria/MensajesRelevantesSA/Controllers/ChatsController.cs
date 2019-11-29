@@ -16,12 +16,16 @@ namespace MensajesRelevantesSA.Controllers
     {
 
         private MessagesLogic Messages = new MessagesLogic();
-        private string LoggedUser = SessionUserNode.getInstance.Username;
+        private string LoggedUser = string.Empty;
         // GET: Chats
 
         public ActionResult Index(string receptor)
         {
-            
+             HttpCookie objRequestRead= Request.Cookies["auth"];
+            if (objRequestRead!=null)
+            {
+                LoggedUser  =objRequestRead["username"];
+            }
             ViewBag.chats = Messages.getAllContacts(LoggedUser);
             
 
@@ -66,6 +70,11 @@ namespace MensajesRelevantesSA.Controllers
         [HttpPost]  
         public ActionResult NewMessage(HttpPostedFileBase file, string Receptor, string Message)  
         {
+            HttpCookie objRequestRead= Request.Cookies["auth"];
+            if (objRequestRead!=null)
+            {
+                LoggedUser  =objRequestRead["username"];
+            }
             var user =  new UsersLogic();
             if (user.UserExist(Receptor))
             {                
