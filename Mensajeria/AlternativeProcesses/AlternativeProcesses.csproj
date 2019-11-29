@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CesarCipherAlgorithm.cs" />
     <Compile Include="CompressComponents\CompresssDecompressActions.cs" />
     <Compile Include="CompressComponents\Huffman.cs" />
     <Compile Include="CompressComponents\initialReadComponents.cs" />

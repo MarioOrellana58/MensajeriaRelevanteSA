@@ -8,7 +8,6 @@ using System.Security.Cryptography;
 using System.Text;
 using Newtonsoft.Json;
 using AlternativeProcesses;
-
 namespace MensajesRelevantesSA.Repository
 {
     public class UsersLogic
@@ -42,12 +41,13 @@ namespace MensajesRelevantesSA.Repository
 
                 var rand = new Random();
                 int privateKey = rand.Next(10,30);//ir a validar que el random sea único user
-                
-                
-                SDES cipher = new SDES();
-                userPassword = cipher.CipherText(userPassword, "1110010011");
-                 userAnswer = cipher.CipherText(userAnswer, "1110010011");
-                 userQuestion = cipher.CipherText(userQuestion, "1110010011");
+
+
+                var cipher = new CesarCipherAlgorithm();
+                cipher.DictionaryAsembler("mriojeda");
+                userPassword = cipher.CipherCesar(userPassword, "mriojeda");
+                userAnswer = cipher.CipherCesar(userAnswer, "mriojeda");
+                userQuestion = cipher.CipherCesar(userQuestion, "mriojeda");
 
                 var user = new UserNode() { Username = userName, Password = userPassword, Answer = userAnswer, Question = userQuestion, PrivateKey = privateKey};
 
@@ -158,16 +158,16 @@ namespace MensajesRelevantesSA.Repository
                 secretQuestion = Encoding.Default.GetString(hashedBytes);
 
                 
-                SDES cipher = new SDES();
-                secretQuestion = cipher.CipherText(secretQuestion, "1110010011");
-                 secretAnswer = cipher.CipherText(secretAnswer, "1110010011");
-                 newPassword = cipher.CipherText(newPassword, "1110010011");
+                var cipher = new CesarCipherAlgorithm();
+                cipher.DictionaryAsembler("mriojeda");
+                var actualQuestion = cipher.DecipherCesar(searchedUser.Question, "mriojeda");
+                var actualAnswer = cipher.DecipherCesar(searchedUser.Answer, "mriojeda");
 
-                if (searchedUser.Question != secretQuestion || searchedUser.Answer != secretAnswer)
+                if (actualQuestion != secretQuestion || actualAnswer != secretAnswer)
                 {
                     return "Tu pregunta y o respuesta no son válidas >:(";
                 }
-
+                newPassword = cipher.CipherCesar(newPassword, "mriojeda");
                 var updatedUser = new UserNode() { Username = searchedUser.Username, Password = newPassword, Question = searchedUser.Question, Answer = searchedUser.Answer, PrivateKey = searchedUser.PrivateKey};
 
                 var putTask = client.PutAsJsonAsync("Users/" + userName, updatedUser);
@@ -207,9 +207,10 @@ namespace MensajesRelevantesSA.Repository
             var hashedBytes = hash256.ComputeHash(Encoding.Default.GetBytes(password));
             password = Encoding.Default.GetString(hashedBytes);
             
-               SDES cipher = new SDES();
-                password = cipher.CipherText(password, "1110010011");
-            if (searchedUser.Password != password)
+            var cipher = new CesarCipherAlgorithm();
+            cipher.DictionaryAsembler("mriojeda");
+
+            if (cipher.DecipherCesar(searchedUser.Password, "mriojeda") != password)
             {
                 return "Tu contraseña es incorrecta :(";
             }
