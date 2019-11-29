@@ -64,9 +64,8 @@
 					{
 
 						<li class="emisor">
-							@item.Message
-							
-							@Html.ActionLink((string)fileArray[0], "GetFile", "Chats", new { uploadedFile = item.UploadedFile }, null)
+							@item.Message							
+							@Html.ActionLink((string)fileArray[0], "GetFile", "Chats", new { senderReceptor = item.SenderReceptor, sentDate = item.SentDate }, null)
 							@item.SentDate
 						</li>
                     }
@@ -75,7 +74,7 @@
 
                         <li class="receptor">
                             @item.Message
-                            @Html.ActionLink((string)fileArray[0], "GetFile", "Chats", new { uploadedFile = item.UploadedFile }, null)
+                            @Html.ActionLink((string)fileArray[0], "GetFile", "Chats", new { senderReceptor = item.SenderReceptor, sentDate = item.SentDate }, null)
                             @item.SentDate
                         </li>
                     }

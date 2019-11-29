@@ -48,9 +48,10 @@ namespace MensajesRelevantesSA.Controllers
             return RedirectToAction("Index",  new {  receptor = Receptor});
         }
 
-        public ActionResult GetFile(string uploadedFile)
+        public ActionResult GetFile(string senderReceptor, DateTime sentDate)
         {
-            Messages.DecompressSelectedFile(uploadedFile);
+            //buscar mensaje por datos recibidos y descomprimir
+           // Messages.DecompressSelectedFile(uploadedFile[0]);
             return RedirectToAction("Index");
         }
 
