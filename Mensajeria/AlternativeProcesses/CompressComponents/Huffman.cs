@@ -116,7 +116,28 @@ namespace AlternativeProcesses.CompressComponents
                     if (i == decompressBuffer.Length - 1)//si no se ha llegado a 8 y se está en la última iteración, añade ceros al principio
                     {
                         originalBitsAmount += auxString.Length;
-                        compressBuffer[compressBufferPosition] = Convert.ToByte(binaryToDecimal(auxString.PadRight(8, '0')));
+                        auxString = string.Empty;
+                        for (int j = 0; j < _8BitsString.Length; j++)
+                        {
+                            if (auxString.Length == 8)
+                            {                                
+                                 compressBuffer[compressBufferPosition] = Convert.ToByte(binaryToDecimal(auxString));
+                                 auxString = string.Empty;
+                                auxString += _8BitsString[j];
+                            }
+                            else
+                            {
+                                auxString += _8BitsString[j];
+                            }
+                        }
+                        if (auxString.Length < 8)
+                        {
+                            compressBuffer[compressBufferPosition] = Convert.ToByte(binaryToDecimal(auxString.PadRight(8, '0')));
+                        }
+                        else if(auxString.Length == 8)
+                        {
+                            compressBuffer[compressBufferPosition] = Convert.ToByte(binaryToDecimal(auxString));
+                        }
 
                     }
 
