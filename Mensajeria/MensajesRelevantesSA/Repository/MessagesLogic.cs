@@ -21,7 +21,11 @@ namespace MensajesRelevantesSA.Repository
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri("http://localhost:53273/api/Texts");
-                if (textMessage !=null)
+                if (textMessage.Equals(string.Empty) && file == null)
+                {
+                    return "No puede enviar mensajes vacios";
+                }
+                if (textMessage != string.Empty)
                 {
                     var cipher = new SDES();
                     var getUser = new UsersLogic();
@@ -96,7 +100,7 @@ namespace MensajesRelevantesSA.Repository
                     {                    
                         var key = BigInteger.ModPow((int)message.PublicKey,a,p);
                         var commonKey = Convert.ToString((int)key,2);
-                        message.Message = decipherMessage.DecipherText(message.Message, commonKey);
+                        message.Message = message.Message != string.Empty ? decipherMessage.DecipherText(message.Message, commonKey) : string.Empty;
                         decipheredMessages.Add(message);                    
                     }           
                 }
@@ -106,7 +110,7 @@ namespace MensajesRelevantesSA.Repository
                     {                    
                         var key = BigInteger.ModPow((int)message.PublicKey,SessionUserNode.getInstance.PrivateKey,p);
                         var commonKey = Convert.ToString((int)key,2);
-                        message.Message = decipherMessage.DecipherText(message.Message, commonKey);
+                        message.Message = message.Message != string.Empty ? decipherMessage.DecipherText(message.Message, commonKey) : string.Empty;
                         decipheredMessages.Add(message);                    
                     }  
                 }
