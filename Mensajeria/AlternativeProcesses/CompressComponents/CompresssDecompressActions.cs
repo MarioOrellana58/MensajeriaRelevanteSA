@@ -114,28 +114,61 @@ namespace AlternativeProcesses.CompressComponents
                 {
                     var diccionarioDePrefijosDescomp = new Dictionary<string, byte>();
                     var cantBitsOriginales = 0;
-                    var ImAPrefix = true;
-                    while (ImAPrefix)
+                    var index = 0;
+                    var strValue = string.Empty;
+                    var byteValue = string.Empty;
+                    var auxChain = string.Empty;
+                    while (true)
                     {
-                        charactersOfFileName = fileData.IndexOf('|', 0);
-                        if (charactersOfFileName == 0)
+                        if (index != 0 && fileData[index-1] == '|' && fileData[index] == '|' && fileData[index+1] == '|')
                         {
-                            fileData = fileData.Remove(0, 1);
-                            ImAPrefix = false;
+                            diccionarioDePrefijosDescomp.Add(byteValue, (byte)Convert.ToInt32(strValue));
+                            index+=2;
+                            break;
+                        }
+                        else if (index != 0 && fileData[index-1] == '|' && strValue != string.Empty && byteValue != string.Empty)
+                        {                            
+                            diccionarioDePrefijosDescomp.Add(byteValue, (byte)Convert.ToInt32(strValue));
+                            auxChain += fileData[index];
+                            strValue = string.Empty;
+                            byteValue = string.Empty;
+                        }
+                        else if(fileData[index] == '|')
+                        {
+                            if (strValue == string.Empty)
+                            {
+                                strValue = auxChain;
+                            }
+                            else if (byteValue == string.Empty)
+                            {
+                                byteValue = auxChain;
+                            }
+                            auxChain = string.Empty;
                         }
                         else
                         {
-                            var actualByte = fileData.Substring(0, charactersOfFileName);
-                            fileData = fileData.Remove(0, charactersOfFileName + 1);
-                            var actualPrefix = fileData.Substring(0, fileData.IndexOf('|', actualByte.Length));
-                            fileData = fileData.Remove(0, actualPrefix.Length + 1);
-                            diccionarioDePrefijosDescomp.Add(actualPrefix, Convert.ToByte(actualByte));
+                            auxChain += fileData[index];
+                        }                        
+                        index++;
+                    }
+
+                    auxChain = string.Empty;
+                    for (int i = index; i < fileData.Length; i++)
+                    {
+                        if (fileData[i] != '|')
+                        {                            
+                             auxChain +=fileData[i];
+                        }
+                        else
+                        {
+                            index += i-index;
+                            index++;
+                            break;
                         }
                     }
-                    var amountOfCharactersLength = fileData.IndexOf('|', 1);
-                    var amountOfBitsFromOriginalText = fileData.Substring(1, amountOfCharactersLength - 1);
+                    cantBitsOriginales = Convert.ToInt32(auxChain);
                     //Cantidad de bits originales
-                    fileData = fileData.Remove(0, amountOfCharactersLength + 1);
+                    fileData = fileData.Remove(0, index);
 
                     //Aca comienza el texto comprimido que debe descomprimirse
                     int cantLeidos = 0;
