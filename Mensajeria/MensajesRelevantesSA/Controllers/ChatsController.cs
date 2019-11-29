@@ -85,6 +85,12 @@ namespace MensajesRelevantesSA.Controllers
             {
                  return RedirectToAction("Index",  new {receptor = "404"});
             }
-        }  
+        }
+
+        [HttpPost]
+        public ActionResult FindMessage(string toFoundMessage)
+        {            
+             return RedirectToAction("Index");            
+        }
     }
 }
