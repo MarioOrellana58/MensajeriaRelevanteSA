@@ -69,5 +69,21 @@ namespace MensajesRelevantesSA.Controllers
             ModelState.AddModelError(string.Empty, operationStatusCode);            
             return View(User.GetQuestions());
         }
+
+        public ActionResult DeleteAccout(string pass)
+        {
+            HttpCookie objRequestRead= Request.Cookies["auth"];
+            Autentication JWT = new Autentication();
+            if (objRequestRead!= null && objRequestRead["jwt"]!= null && JWT.ValidateSession(objRequestRead["jwt"], objRequestRead["username"]))
+            {
+                string loggedUser = objRequestRead["username"];
+                return RedirectToAction("Index");    //validar si sí coincide el pass y redirigir o a index o a index chats de ser incorrect
+                //return RedirectToAction("Index", "Chats"); este redirecciona al index de chats
+            }
+            else
+            {
+                return RedirectToAction("Error", "Chats");
+            }
+        }
     }
 }

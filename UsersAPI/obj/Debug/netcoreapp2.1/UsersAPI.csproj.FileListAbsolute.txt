@@ -244,3 +244,20 @@ C:\Users\José\Documents\Estructura De Datos II\Proyecto actual\D\MensajeriaRele
 C:\Users\José\Documents\Estructura De Datos II\Proyecto actual\D\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.csproj.CopyComplete
 C:\Users\José\Documents\Estructura De Datos II\Proyecto actual\D\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.dll
 C:\Users\José\Documents\Estructura De Datos II\Proyecto actual\D\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.pdb
+C:\P\ptasks\MensajeriaRelevanteSA\UsersAPI\bin\Debug\netcoreapp2.1\UsersAPI.deps.json
+C:\P\ptasks\MensajeriaRelevanteSA\UsersAPI\bin\Debug\netcoreapp2.1\UsersAPI.runtimeconfig.json
+C:\P\ptasks\MensajeriaRelevanteSA\UsersAPI\bin\Debug\netcoreapp2.1\UsersAPI.runtimeconfig.dev.json
+C:\P\ptasks\MensajeriaRelevanteSA\UsersAPI\bin\Debug\netcoreapp2.1\UsersAPI.dll
+C:\P\ptasks\MensajeriaRelevanteSA\UsersAPI\bin\Debug\netcoreapp2.1\UsersAPI.pdb
+C:\P\ptasks\MensajeriaRelevanteSA\UsersAPI\bin\Debug\netcoreapp2.1\AlternativeProcesses.dll
+C:\P\ptasks\MensajeriaRelevanteSA\UsersAPI\bin\Debug\netcoreapp2.1\AlternativeProcesses.pdb
+C:\P\ptasks\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.csprojAssemblyReference.cache
+C:\P\ptasks\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.csproj.CoreCompileInputs.cache
+C:\P\ptasks\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.RazorAssemblyInfo.cache
+C:\P\ptasks\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.RazorAssemblyInfo.cs
+C:\P\ptasks\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.AssemblyInfoInputs.cache
+C:\P\ptasks\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.AssemblyInfo.cs
+C:\P\ptasks\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.RazorTargetAssemblyInfo.cache
+C:\P\ptasks\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.csproj.CopyComplete
+C:\P\ptasks\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.dll
+C:\P\ptasks\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.pdb

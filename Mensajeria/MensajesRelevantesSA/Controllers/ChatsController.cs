@@ -152,5 +152,21 @@ namespace MensajesRelevantesSA.Controllers
         {
             return View();
         }
+
+        public ActionResult ExportChats()
+        {
+            HttpCookie objRequestRead= Request.Cookies["auth"];
+            if (objRequestRead!= null && objRequestRead["jwt"]!= null && JWT.ValidateSession(objRequestRead["jwt"], objRequestRead["username"]))
+            {
+                string loggedUser = objRequestRead["username"];
+                return RedirectToAction("Index");    
+            }
+            else
+            {
+                return RedirectToAction("Error");
+            }
+        }
+
+        
     }
 }
