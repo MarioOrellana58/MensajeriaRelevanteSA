@@ -157,8 +157,8 @@ namespace AlternativeProcesses.CompressComponents
                 }
             }
 
-            var bufferToWrite = new byte[compressBufferPosition + 1];
-            for (int i = 0; i < compressBufferPosition + 1; i++)
+            var bufferToWrite = new byte[compressBufferPosition];
+            for (int i = 0; i < compressBufferPosition; i++)
             {
                 bufferToWrite[i] = compressBuffer[i];
             }

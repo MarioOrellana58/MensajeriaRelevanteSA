@@ -64,5 +64,19 @@ namespace UsersAPI.Controllers
             return StatusCode(200, "Your user has been updated :D");
         }
 
+        [HttpDelete("{userName}")]
+        public IActionResult Delete(string userName)
+        {
+            var user = _userService.Get(userName);
+
+            if (user == null)
+            {
+                return StatusCode(404, "El usuario no existe");
+            }
+
+            _userService.Remove(user.Username);
+
+            return StatusCode(200, "Usuario eliminado :D");
+        }
     }
 }

@@ -7,6 +7,9 @@ using MensajesRelevantesSA.Models;
 using AlternativeProcesses;
 using System.Numerics;
 using AlternativeProcesses.CompressComponents;
+using System.IO;
+using Newtonsoft.Json;
+
 namespace MensajesRelevantesSA.Repository
 {
     public class MessagesLogic
@@ -261,6 +264,145 @@ namespace MensajesRelevantesSA.Repository
                     }
                 }
                 return FilePath;
+            }
+        }
+
+        public List<MessageModel> LookForMessages(string valueToLookFor)
+        {
+            return MyMessages().FindAll(messages => messages.Message.Contains(valueToLookFor));
+        }
+        public string ExportMyMessages()
+        {
+            var messagesToExport = MyMessages();
+            if (messagesToExport != null)
+            {
+
+                var path = Path.Combine(HttpContext.Current.Server.MapPath("~/UploadedFiles"), "Chats.csv");
+                if (!System.IO.File.Exists(path))
+                {
+                    using (StreamWriter writer = System.IO.File.CreateText(path))
+                    {
+                        for (int i = 0; i < messagesToExport.Count; i++)
+                        {
+                            if (i == messagesToExport.Count - 1)
+                            {
+                                writer.Write(JsonConvert.SerializeObject(messagesToExport[i]));
+                            }
+                            else
+                            {
+                                writer.Write(JsonConvert.SerializeObject(messagesToExport[i]) + ",");
+                            }
+                        }
+                    }
+                }
+                return path;
+            }
+            else
+            {
+                return string.Empty;
+            }
+        }
+        public List<MessageModel> MyMessages()
+        {
+            var loggedUser = LoggedUser;
+            var messagesThatContains = getAllUserMessages(loggedUser);
+            if (messagesThatContains.GetType().ToString() == "System.String")
+            {
+                return null;
+            }
+
+            if (messagesThatContains != null)
+            {
+                var resultOfTask = new List<MessageModel>();
+                var decipherMessage = new SDES();
+                var decompressFileMessage = new CompresssDecompressActions();
+                var getUser = new UsersLogic();
+                foreach (var item in messagesThatContains)
+                {
+                    var receptor = item.SenderReceptor.Split('|');
+                    if (receptor[0] == LoggedUser)
+                    {//es un mensaje que yo envié
+                        var a = getUser.getUserByUsername(receptor[1]).PrivateKey;
+                        var key = BigInteger.ModPow((int)item.PublicKey, a, p);
+                        var commonKey = Convert.ToString((int)key, 2);
+                        item.Message = item.Message != string.Empty ? decipherMessage.DecipherText(item.Message, commonKey) : string.Empty;
+                        resultOfTask.Add(item);
+                    }
+                    else
+                    {//es un mensaje recibido
+                        var key = BigInteger.ModPow((int)item.PublicKey, UserPrivateKey, p);
+                        var commonKey = Convert.ToString((int)key, 2);
+                        item.Message = item.Message != string.Empty ? decipherMessage.DecipherText(item.Message, commonKey) : string.Empty;
+                        resultOfTask.Add(item);
+                    }
+                }
+                return resultOfTask;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public string DeleteMessages(string senderReceptor)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://localhost:53273/api/Texts");
+                var responseTask = client.DeleteAsync("Messages/" + senderReceptor);
+                responseTask.Wait();
+                var result = responseTask.Result;
+                var FilePath = string.Empty;
+                if (result.IsSuccessStatusCode)
+                {
+                    return "Mensajes eliminados";
+                }
+                else
+                {
+                    return "Ya no hay mensajes";
+                }
+            }
+        }
+
+        public List<MessageModel> MessageThatContainsSearch(string valueToLookFor)
+        {
+            var loggedUser = LoggedUser;
+            var messagesThatContains = getAllUserMessages(loggedUser);
+            if (messagesThatContains.GetType().ToString() == "System.String")
+            {
+                return null;
+            }
+
+            if (messagesThatContains != null)
+            {
+                var resultOfTask = new List<MessageModel>();
+                var decipherMessage = new SDES();
+                var decompressFileMessage = new CompresssDecompressActions();
+                var getUser = new UsersLogic();
+                foreach (var item in messagesThatContains)
+                {
+                    var receptor = item.SenderReceptor.Split('|');
+                    if (receptor[0] == LoggedUser)
+                    {//es un mensaje que yo envié
+                        var a = getUser.getUserByUsername(receptor[1]).PrivateKey;
+                        var key = BigInteger.ModPow((int)item.PublicKey, a, p);
+                        var commonKey = Convert.ToString((int)key, 2);
+                        item.Message = item.Message != string.Empty ? decipherMessage.DecipherText(item.Message, commonKey) : string.Empty;
+                        resultOfTask.Add(item);
+                    }
+                    else
+                    {//es un mensaje recibido
+                        var key = BigInteger.ModPow((int)item.PublicKey, UserPrivateKey, p);
+                        var commonKey = Convert.ToString((int)key, 2);
+                        item.Message = item.Message != string.Empty ? decipherMessage.DecipherText(item.Message, commonKey) : string.Empty;
+                        resultOfTask.Add(item);
+                    }
+                }
+                return resultOfTask.FindAll(messages => messages.Message.Contains(valueToLookFor));
+            }
+            else
+            {
+                return null;
             }
         }
     }

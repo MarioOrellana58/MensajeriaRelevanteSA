@@ -13512,11 +13512,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\P\\mast\\MensajeriaRelevanteSA\\UsersAPI\\UsersAPI.csproj",
+      "projectUniqueName": "C:\\P\\l\\MensajeriaRelevanteSA\\UsersAPI\\UsersAPI.csproj",
       "projectName": "UsersAPI",
-      "projectPath": "C:\\P\\mast\\MensajeriaRelevanteSA\\UsersAPI\\UsersAPI.csproj",
+      "projectPath": "C:\\P\\l\\MensajeriaRelevanteSA\\UsersAPI\\UsersAPI.csproj",
       "packagesPath": "C:\\Users\\mario\\.nuget\\packages\\",
-      "outputPath": "C:\\P\\mast\\MensajeriaRelevanteSA\\UsersAPI\\obj\\",
+      "outputPath": "C:\\P\\l\\MensajeriaRelevanteSA\\UsersAPI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -13535,8 +13535,8 @@
       "frameworks": {
         "netcoreapp2.1": {
           "projectReferences": {
-            "C:\\P\\mast\\MensajeriaRelevanteSA\\Mensajeria\\AlternativeProcesses\\AlternativeProcesses.csproj": {
-              "projectPath": "C:\\P\\mast\\MensajeriaRelevanteSA\\Mensajeria\\AlternativeProcesses\\AlternativeProcesses.csproj"
+            "C:\\P\\l\\MensajeriaRelevanteSA\\Mensajeria\\AlternativeProcesses\\AlternativeProcesses.csproj": {
+              "projectPath": "C:\\P\\l\\MensajeriaRelevanteSA\\Mensajeria\\AlternativeProcesses\\AlternativeProcesses.csproj"
             }
           }
         }

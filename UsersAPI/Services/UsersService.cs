@@ -31,6 +31,10 @@ namespace UsersAPI.Services
         public void Update(string username, UserNode UserIn) =>
             _Users.ReplaceOne(user => user.Username == username, UserIn);
     
+         public void Remove(UserNode userIn) =>
+        _Users.DeleteOne(user => user.Username == userIn.Username);
 
+        public void Remove(string userName) =>
+        _Users.DeleteOne(user => user.Username == userName);
     }
 }

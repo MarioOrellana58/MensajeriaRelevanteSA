@@ -74,42 +74,52 @@ namespace MensajesRelevantesSA.Repository
 
         public bool ValidateSession(string jwt, string loggedUser)
         {
-            var jktoken = jwt;
-            var handler = new JwtSecurityTokenHandler();
-            var token = handler.ReadJwtToken(jktoken);
-             var claims = token.Claims;
-            foreach (var claim in claims)
+            if (jwt != "400")
             {
-                var claimType = claim.Type;
-                var claimValue = claim.Value;
-                if (claimType.Contains("userdata"))
+                var jktoken = jwt;
+                var handler = new JwtSecurityTokenHandler();
+                var token = handler.ReadJwtToken(jktoken);
+                var claims = token.Claims;
+                foreach (var claim in claims)
                 {
-                    string addr = "";
-                    foreach (NetworkInterface mac in NetworkInterface.GetAllNetworkInterfaces()) {
-                        if (mac.OperationalStatus == OperationalStatus.Up) {
-                            addr = mac.GetPhysicalAddress().ToString();
-                            break;
+                    var claimType = claim.Type;
+                    var claimValue = claim.Value;
+                    if (claimType.Contains("userdata"))
+                    {
+                        string addr = "";
+                        foreach (NetworkInterface mac in NetworkInterface.GetAllNetworkInterfaces())
+                        {
+                            if (mac.OperationalStatus == OperationalStatus.Up)
+                            {
+                                addr = mac.GetPhysicalAddress().ToString();
+                                break;
+                            }
+                        }
+                        if (!claimValue.Contains(loggedUser) || !claimValue.Contains(addr))
+                        {
+                            return false; //el token no es válido para la sesión
                         }
                     }
-                    if (!claimValue.Contains(loggedUser) || !claimValue.Contains(addr))
+                    else if (claimType.Equals("exp"))
                     {
-                        return false; //el token no es válido para la sesión
+                        System.DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
+                        dtDateTime = dtDateTime.AddSeconds(long.Parse(claimValue)).ToLocalTime();
+                        var expirationDate = dtDateTime;
+                        if (expirationDate < DateTime.Now)
+                        {
+                            return false; //token expirado
+                        }
+
+
                     }
                 }
-                else if (claimType.Equals("exp"))
-                {
-                    System.DateTime dtDateTime = new DateTime(1970,1,1,0,0,0,0,System.DateTimeKind.Utc);
-                    dtDateTime = dtDateTime.AddSeconds( long.Parse(claimValue) ).ToLocalTime();
-                    var expirationDate = dtDateTime;                                      
-                    if (expirationDate < DateTime.Now)
-                    {
-                        return false; //token expirado
-                    }
-                    
-                    
-                }
+                return true;
             }
-            return true;
+            else
+            {
+                return false;
+            }
+            
 
         }
 

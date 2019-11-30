@@ -69,5 +69,49 @@ namespace MensajesRelevantesSA.Controllers
             ModelState.AddModelError(string.Empty, operationStatusCode);            
             return View(User.GetQuestions());
         }
+
+        public ActionResult DeleteAccout(string pass)
+        {
+            HttpCookie objRequestRead= Request.Cookies["auth"];
+            Autentication JWT = new Autentication();
+            if (objRequestRead!= null && objRequestRead["jwt"]!= null && JWT.ValidateSession(objRequestRead["jwt"], objRequestRead["username"]))
+            {
+                string loggedUser = objRequestRead["username"];
+                if (User.DeleteMyAccount(loggedUser, pass).Equals("Usuario eliminado correctamente"))
+                {
+                    var deleteMyMessages = new MessagesLogic();
+                    var IAmDone = deleteMyMessages.DeleteMessages(loggedUser);
+                    objRequestRead.Values["jwt"] = "400";
+                    Response.Cookies.Add(objRequestRead);
+                    return RedirectToAction("LogInUser");
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Chats"); 
+                }
+                
+            }
+            else
+            {
+                return RedirectToAction("Error", "Chats");
+            }
+        }
+
+        public ActionResult LogOut()
+        {
+            HttpCookie objRequestRead= Request.Cookies["auth"];
+            Autentication JWT = new Autentication();
+            if (objRequestRead!= null && objRequestRead["jwt"]!= null && JWT.ValidateSession(objRequestRead["jwt"], objRequestRead["username"]))
+            {
+
+                    objRequestRead.Values["jwt"] = "400";
+                    Response.Cookies.Add(objRequestRead);
+                    return RedirectToAction("LogInUser");               
+            }
+            else
+            {
+                return RedirectToAction("Error", "Chats");
+            }
+        }
     }
 }

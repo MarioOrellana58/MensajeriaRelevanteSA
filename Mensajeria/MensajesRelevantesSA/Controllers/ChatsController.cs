@@ -9,6 +9,8 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using MensajesRelevantesSA.Models;
 using MensajesRelevantesSA.Repository;
+using Newtonsoft.Json;
+
 namespace MensajesRelevantesSA.Controllers
 {
 
@@ -24,9 +26,9 @@ namespace MensajesRelevantesSA.Controllers
         {
             
              HttpCookie objRequestRead= Request.Cookies["auth"];
-            if (objRequestRead!= null && objRequestRead["jwt"]!= null && JWT.ValidateSession(objRequestRead["jwt"], objRequestRead["username"]))
+            if (objRequestRead!= null && objRequestRead["jwt"]!= null  && JWT.ValidateSession(objRequestRead["jwt"], objRequestRead["username"]))
             {
-            
+            http://localhost:51163/Users/ChangePassword
                 if (objRequestRead!=null)
                 {
                     LoggedUser  =objRequestRead["username"];
@@ -51,6 +53,28 @@ namespace MensajesRelevantesSA.Controllers
                         ViewBag.Error = "El usuario a quien intentas enviar un mensaje no existe";
                     }
                 }
+
+                var messagesList = new List<MessageModel>();
+                var jsonMessages = string.Empty;   
+                var path2 = Path.Combine(Server.MapPath("~/UploadedFiles"), "messagesForView.json");
+                if (System.IO.File.Exists(path2))
+                {                    
+                    using (StreamReader reader = System.IO.File.OpenText(path2)) 
+                    {
+                        string line = "";
+                        while ((line = reader.ReadLine()) != null) 
+                        {
+                            jsonMessages += line;
+                        }
+                        reader.Close();
+                    }
+                    System.IO.File.Delete(path2);
+                    JsonConvert.PopulateObject(jsonMessages, messagesList);
+                    ViewBag.Found = messagesList;
+
+                }
+
+                
                  
                  return View();               
 
@@ -80,28 +104,26 @@ namespace MensajesRelevantesSA.Controllers
             if (objRequestRead!= null && objRequestRead["jwt"]!= null && JWT.ValidateSession(objRequestRead["jwt"], objRequestRead["username"]))
             {
                 var filePath = Messages.DecompressSelectedFile(senderReceptor, sentDate);
-                return RedirectToAction("Index");
+                var fileName = string.Empty;
+                for (int i = filePath.Length-1; i > -1; i--)
+                {
+                    if (filePath[i] == '\\')
+                    {
+                        i++;
+                        fileName = filePath.Substring(i, filePath.Length-i);
+                        break;
+                    }
+                }
+                byte[] fileBytes = System.IO.File.ReadAllBytes(filePath);
+                System.IO.File.Delete(filePath);
+                return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
             }
             else
             {
                 return RedirectToAction("Error");
             }
         }
-
-        [HttpGet]  
-        public ActionResult NewMessage()  
-        {              
-             HttpCookie objRequestRead= Request.Cookies["auth"];
-            if (objRequestRead!= null && objRequestRead["jwt"]!= null && JWT.ValidateSession(objRequestRead["jwt"], objRequestRead["username"]))
-            {
-                 return View(); 
-            }
-            else
-            {
-                return RedirectToAction("Error");
-            }
-        }  
-
+        
         [HttpPost]  
         public ActionResult NewMessage(HttpPostedFileBase file, string Receptor, string Message)  
         {
@@ -130,12 +152,27 @@ namespace MensajesRelevantesSA.Controllers
         }
 
         [HttpPost]
-        public ActionResult FindMessage(string toFoundMessage)
-        {   
-             HttpCookie objRequestRead= Request.Cookies["auth"];
+        public ActionResult FindMessage(string messageToFound)
+        {
+            HttpCookie objRequestRead= Request.Cookies["auth"];
             if (objRequestRead!= null && objRequestRead["jwt"]!= null && JWT.ValidateSession(objRequestRead["jwt"], objRequestRead["username"]))
-            {   
-                return RedirectToAction("Index");    
+            {
+                var messagesForView = Messages.MessageThatContainsSearch(messageToFound);
+                if (messagesForView == null)
+                {
+                    return RedirectToAction("Index");
+                }
+                
+                var jsonList =  JsonConvert.SerializeObject(messagesForView);
+                var path2 = Path.Combine(Server.MapPath("~/UploadedFiles"), "messagesForView.json");
+                if (!System.IO.File.Exists(path2)) 
+                {
+                    using (StreamWriter sw = System.IO.File.CreateText(path2)) 
+                    {
+                        sw.WriteLine(jsonList);
+                    }	
+                }
+                return RedirectToAction("Index"); 
             }
             else
             {
@@ -147,5 +184,31 @@ namespace MensajesRelevantesSA.Controllers
         {
             return View();
         }
+
+        public ActionResult ExportChats()
+        {
+            HttpCookie objRequestRead = Request.Cookies["auth"];
+            if (objRequestRead != null && objRequestRead["jwt"] != null && JWT.ValidateSession(objRequestRead["jwt"], objRequestRead["username"]))
+            {
+                var loggedUser = objRequestRead["username"];
+                var pathOfExportChat = Messages.ExportMyMessages();
+                if (pathOfExportChat != string.Empty)
+                {
+                    byte[] fileBytes = System.IO.File.ReadAllBytes(pathOfExportChat);
+                    System.IO.File.Delete(pathOfExportChat);
+                    return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, pathOfExportChat);
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Error");
+            }
+        }
+
+
     }
 }

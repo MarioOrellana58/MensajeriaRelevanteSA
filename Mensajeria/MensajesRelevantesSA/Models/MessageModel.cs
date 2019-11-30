@@ -20,7 +20,7 @@ namespace MensajesRelevantesSA.Models
             HttpCookie objRequestRead= HttpContext.Current.Request.Cookies["auth"];
             if (objRequestRead!=null)
             {
-                LoggedUser  =objRequestRead["username"];
+                LoggedUser = objRequestRead["username"];
             }
             
         }

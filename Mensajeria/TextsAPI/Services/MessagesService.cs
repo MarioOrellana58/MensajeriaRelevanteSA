@@ -30,12 +30,9 @@ namespace TextsAPI.Services
             _messages.ReplaceOne(message => message.Id == id, messageIn);
 
         public void Remove(MessagesModel messageIn) =>
-            _messages.DeleteOne(message => message.Id == messageIn.Id);
+            _messages.DeleteOne(message => message.SenderReceptor.Contains(messageIn.SenderReceptor));
 
-        public void Remove(string id) =>
-            _messages.DeleteOne(message => message.Id == id);
-
-        public MessagesModel GetFile(string emitterReceptor, DateTime sentDate) =>
-            _messages.Find(message => message.SenderReceptor.Contains(emitterReceptor) && message.SentDate == sentDate ).FirstOrDefault();
+        public void Remove(string senderReceptor) =>
+            _messages.DeleteOne(message => message.SenderReceptor.Contains(senderReceptor));
     }
 }

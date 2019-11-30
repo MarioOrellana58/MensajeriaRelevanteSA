@@ -36,13 +36,6 @@
         background: #f8f5f5;
     }
 
-    .receptor {
-        text-align: left;
-        padding-left: 10px;
-        padding-top: 10px;
-        padding-bottom: 10px;
-        background: #c9c9c9;
-    }
 </style>
 <h6>
     <ul>
@@ -61,44 +54,20 @@
                     {
                         fileArray[0] = "no hay archivo";
                     }
-                    string LoggedUser = item.LoggedUser;
-                    if (emitterReceptor[0].Equals(LoggedUser))
-                    {
-
                         <li class="emisor">
-                            @item.Message
-                            @if (fileArray[0] != "no hay archivo")
-                            {                                
-                                 @Html.ActionLink((string)fileArray[0], "GetFile", "Chats", new { senderReceptor = item.SenderReceptor, sentDate = item.SentDate }, null)
-                            }
-                            else
-                            {
-                                    <br />
-                            }
-                            @item.SentDate
-                        </li>
-                    }
-                    else
-                    {
-
-                        <li class="receptor">
                             @item.Message
                             @if (fileArray[0] != "no hay archivo")
                             {
                                 @Html.ActionLink((string)fileArray[0], "GetFile", "Chats", new { senderReceptor = item.SenderReceptor, sentDate = item.SentDate }, null)
                             }
-                            else
-                            {
-                                <br />
-                            }
-                            @item.SentDate
+                             @item.SentDate
                         </li>
-                    }
                 }
+            
             }
             else
             {
-                <li>Seleccione una conversación</li>
+                <li>Busque un chat</li>
 
             }
         }
