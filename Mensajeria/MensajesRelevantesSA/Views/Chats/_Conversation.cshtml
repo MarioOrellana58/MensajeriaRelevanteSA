@@ -1,5 +1,7 @@
 ﻿@model List<MensajesRelevantesSA.Models.MessageModel>
 
+@using System.Collections.Generic;
+@using System.Web;
 
 <style>
     ul {
@@ -18,13 +20,13 @@
         padding: 0px;
     }
 
-    ul li a {
-        color: black;
-        display: block;
-        height: 100%;
-        width: 100%;
-        padding: 20px;
-    }
+        ul li a {
+            color: black;
+            display: block;
+            height: 100%;
+            width: 100%;
+            padding: 20px;
+        }
 
     .emisor {
         text-align: right;
@@ -45,29 +47,29 @@
 <h6>
     <ul>
         @{
-			if (Model != null)
-			{
-				foreach (var item in Model)
-				{
-					var emitterReceptor = item.SenderReceptor.Split('|');
-					var fileArray = new string[1];
-					if (item.UploadedFile != "")
-					{						
-						fileArray = item.UploadedFile.Split('|') ;
-					}
-					else
-					{
-						fileArray[0] = "no hay archivo";
-					}
+            if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                    var emitterReceptor = item.SenderReceptor.Split('|');
+                    var fileArray = new string[1];
+                    if (item.UploadedFile != "")
+                    {
+                        fileArray = item.UploadedFile.Split('|');
+                    }
+                    else
+                    {
+                        fileArray[0] = "no hay archivo";
+                    }
+                    string LoggedUser = item.LoggedUser;
+                    if (emitterReceptor[0].Equals(LoggedUser))
+                    {
 
-					if (emitterReceptor[0].Equals(MensajesRelevantesSA.Models.SessionUserNode.getInstance.Username))
-					{
-
-						<li class="emisor">
-							@item.Message							
-							@Html.ActionLink((string)fileArray[0], "GetFile", "Chats", new { senderReceptor = item.SenderReceptor, sentDate = item.SentDate }, null)
-							@item.SentDate
-						</li>
+                        <li class="emisor">
+                            @item.Message
+                            @Html.ActionLink((string)fileArray[0], "GetFile", "Chats", new { senderReceptor = item.SenderReceptor, sentDate = item.SentDate }, null)
+                            @item.SentDate
+                        </li>
                     }
                     else
                     {

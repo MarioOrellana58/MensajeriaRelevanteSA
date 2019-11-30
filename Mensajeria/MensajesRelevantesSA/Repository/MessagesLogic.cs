@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Security.Cryptography;
-using System.Text;
 using System.Net.Http;
 using MensajesRelevantesSA.Models;
 using AlternativeProcesses;
@@ -15,6 +13,17 @@ namespace MensajesRelevantesSA.Repository
     {
         private int p = 11;
         private int g = 3;
+        private int UserPrivateKey = 0;
+        private string LoggedUser = string.Empty;
+        public MessagesLogic()
+        {
+            HttpCookie objRequestRead= HttpContext.Current.Request.Cookies["auth"];
+            if (objRequestRead!=null)
+            {
+                UserPrivateKey  = Convert.ToInt32(objRequestRead["pk"]);
+                LoggedUser  =objRequestRead["username"];
+            }
+        }
 
         public string Create(string senderReceptor, string textMessage, HttpPostedFileBase file)
         {
@@ -35,7 +44,7 @@ namespace MensajesRelevantesSA.Repository
                     var a = getUser.getUserByUsername(receptor[1]).PrivateKey;
                     var receptorKey = (Math.Pow(g,a)%p) ;
                     
-                    var key = BigInteger.ModPow((int)receptorKey,SessionUserNode.getInstance.PrivateKey,p);
+                    var key = BigInteger.ModPow((int)receptorKey,UserPrivateKey,p);
                     var cipherKey = Convert.ToString(((int)key),2);
 
                      textMessage =  cipher.CipherText(textMessage, cipherKey);
@@ -50,7 +59,7 @@ namespace MensajesRelevantesSA.Repository
                     SenderReceptor = senderReceptor,
                     Message = textMessage,
                     UploadedFile = file!=null ? compressFile.generateCharactersList(file):"",
-                    PublicKey = (int)(Math.Pow(g, SessionUserNode.getInstance.PrivateKey)%p)
+                    PublicKey = (int)(Math.Pow(g, UserPrivateKey)%p)
                 };
 
                 var postTask = client.PostAsJsonAsync("Messages", message);
@@ -94,7 +103,7 @@ namespace MensajesRelevantesSA.Repository
                 {
                     return searchedMessages;
                 }
-                if (receptor[0] == SessionUserNode.getInstance.Username)
+                if (receptor[0] == LoggedUser)
                 {//es un mensaje que yo envié
                     var a = getUser.getUserByUsername(receptor[1]).PrivateKey;
                     foreach (var message in searchedMessages)
@@ -109,7 +118,7 @@ namespace MensajesRelevantesSA.Repository
                 {//es un mensaje recibido
                     foreach (var message in searchedMessages)
                     {                    
-                        var key = BigInteger.ModPow((int)message.PublicKey,SessionUserNode.getInstance.PrivateKey,p);
+                        var key = BigInteger.ModPow((int)message.PublicKey,UserPrivateKey,p);
                         var commonKey = Convert.ToString((int)key,2);
                         message.Message = message.Message != string.Empty ? decipherMessage.DecipherText(message.Message, commonKey) : string.Empty;
                         decipheredMessages.Add(message);                    
@@ -198,7 +207,7 @@ namespace MensajesRelevantesSA.Repository
 
         public List<MessageModel> loadMessages(string receptor)
         {
-            var loggedUser = SessionUserNode.getInstance.Username;
+            var loggedUser = LoggedUser;
             
             var loggedUserSentMessages = getMessages(loggedUser + '|' +  receptor);
             var loggedUserReceivedMessages = getMessages(receptor + '|' +  loggedUser);

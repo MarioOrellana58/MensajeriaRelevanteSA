@@ -48,7 +48,6 @@ namespace MensajesRelevantesSA.Repository
             return token;
         }
 
-
         public async Task<string> GenerarJWT(string loggedUser, string loggedUser2, string key, string json)       
         {
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -59,7 +58,7 @@ namespace MensajesRelevantesSA.Repository
                 audience: loggedUser2,
                 subject: claims,
                 notBefore: DateTime.Now,
-                expires: DateTime.Now.AddSeconds(10),
+                expires: DateTime.Now.AddHours(1),//add seconds to debug
                 signingCredentials:
                 new SigningCredentials(new SymmetricSecurityKey(Encoding.Default.GetBytes(key)),SecurityAlgorithms.HmacSha256Signature));
 
@@ -71,6 +70,47 @@ namespace MensajesRelevantesSA.Repository
             ClaimsIdentity claimsIdentity = new ClaimsIdentity();
             claimsIdentity.AddClaim(new Claim(ClaimTypes.UserData, userJson));
             return Task.FromResult(claimsIdentity);
+        }
+
+        public bool ValidateSession(string jwt, string loggedUser)
+        {
+            var jktoken = jwt;
+            var handler = new JwtSecurityTokenHandler();
+            var token = handler.ReadJwtToken(jktoken);
+             var claims = token.Claims;
+            foreach (var claim in claims)
+            {
+                var claimType = claim.Type;
+                var claimValue = claim.Value;
+                if (claimType.Contains("userdata"))
+                {
+                    string addr = "";
+                    foreach (NetworkInterface mac in NetworkInterface.GetAllNetworkInterfaces()) {
+                        if (mac.OperationalStatus == OperationalStatus.Up) {
+                            addr = mac.GetPhysicalAddress().ToString();
+                            break;
+                        }
+                    }
+                    if (!claimValue.Contains(loggedUser) || !claimValue.Contains(addr))
+                    {
+                        return false; //el token no es válido para la sesión
+                    }
+                }
+                else if (claimType.Equals("exp"))
+                {
+                    System.DateTime dtDateTime = new DateTime(1970,1,1,0,0,0,0,System.DateTimeKind.Utc);
+                    dtDateTime = dtDateTime.AddSeconds( long.Parse(claimValue) ).ToLocalTime();
+                    var expirationDate = dtDateTime;                                      
+                    if (expirationDate < DateTime.Now)
+                    {
+                        return false; //token expirado
+                    }
+                    
+                    
+                }
+            }
+            return true;
+
         }
 
     }

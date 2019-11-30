@@ -193,3 +193,37 @@ C:\Users\José\Documents\Estructura De Datos II\Proyecto actual\A\MensajeriaRele
 C:\Users\José\Documents\Estructura De Datos II\Proyecto actual\A\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.csproj.CopyComplete
 C:\Users\José\Documents\Estructura De Datos II\Proyecto actual\A\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.dll
 C:\Users\José\Documents\Estructura De Datos II\Proyecto actual\A\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.pdb
+C:\P\mast\MensajeriaRelevanteSA\UsersAPI\bin\Debug\netcoreapp2.1\UsersAPI.deps.json
+C:\P\mast\MensajeriaRelevanteSA\UsersAPI\bin\Debug\netcoreapp2.1\UsersAPI.runtimeconfig.json
+C:\P\mast\MensajeriaRelevanteSA\UsersAPI\bin\Debug\netcoreapp2.1\UsersAPI.runtimeconfig.dev.json
+C:\P\mast\MensajeriaRelevanteSA\UsersAPI\bin\Debug\netcoreapp2.1\UsersAPI.dll
+C:\P\mast\MensajeriaRelevanteSA\UsersAPI\bin\Debug\netcoreapp2.1\UsersAPI.pdb
+C:\P\mast\MensajeriaRelevanteSA\UsersAPI\bin\Debug\netcoreapp2.1\AlternativeProcesses.dll
+C:\P\mast\MensajeriaRelevanteSA\UsersAPI\bin\Debug\netcoreapp2.1\AlternativeProcesses.pdb
+C:\P\mast\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.csprojAssemblyReference.cache
+C:\P\mast\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.csproj.CoreCompileInputs.cache
+C:\P\mast\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.RazorAssemblyInfo.cache
+C:\P\mast\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.RazorAssemblyInfo.cs
+C:\P\mast\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.AssemblyInfoInputs.cache
+C:\P\mast\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.AssemblyInfo.cs
+C:\P\mast\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.RazorTargetAssemblyInfo.cache
+C:\P\mast\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.csproj.CopyComplete
+C:\P\mast\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.dll
+C:\P\mast\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.pdb
+C:\Users\José\Documents\Estructura De Datos II\Proyecto actual\C\MensajeriaRelevanteSA\UsersAPI\bin\Debug\netcoreapp2.1\UsersAPI.deps.json
+C:\Users\José\Documents\Estructura De Datos II\Proyecto actual\C\MensajeriaRelevanteSA\UsersAPI\bin\Debug\netcoreapp2.1\UsersAPI.runtimeconfig.json
+C:\Users\José\Documents\Estructura De Datos II\Proyecto actual\C\MensajeriaRelevanteSA\UsersAPI\bin\Debug\netcoreapp2.1\UsersAPI.runtimeconfig.dev.json
+C:\Users\José\Documents\Estructura De Datos II\Proyecto actual\C\MensajeriaRelevanteSA\UsersAPI\bin\Debug\netcoreapp2.1\UsersAPI.dll
+C:\Users\José\Documents\Estructura De Datos II\Proyecto actual\C\MensajeriaRelevanteSA\UsersAPI\bin\Debug\netcoreapp2.1\UsersAPI.pdb
+C:\Users\José\Documents\Estructura De Datos II\Proyecto actual\C\MensajeriaRelevanteSA\UsersAPI\bin\Debug\netcoreapp2.1\AlternativeProcesses.dll
+C:\Users\José\Documents\Estructura De Datos II\Proyecto actual\C\MensajeriaRelevanteSA\UsersAPI\bin\Debug\netcoreapp2.1\AlternativeProcesses.pdb
+C:\Users\José\Documents\Estructura De Datos II\Proyecto actual\C\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.csprojAssemblyReference.cache
+C:\Users\José\Documents\Estructura De Datos II\Proyecto actual\C\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.csproj.CoreCompileInputs.cache
+C:\Users\José\Documents\Estructura De Datos II\Proyecto actual\C\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.RazorAssemblyInfo.cache
+C:\Users\José\Documents\Estructura De Datos II\Proyecto actual\C\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.RazorAssemblyInfo.cs
+C:\Users\José\Documents\Estructura De Datos II\Proyecto actual\C\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.AssemblyInfoInputs.cache
+C:\Users\José\Documents\Estructura De Datos II\Proyecto actual\C\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.AssemblyInfo.cs
+C:\Users\José\Documents\Estructura De Datos II\Proyecto actual\C\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.RazorTargetAssemblyInfo.cache
+C:\Users\José\Documents\Estructura De Datos II\Proyecto actual\C\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.csproj.CopyComplete
+C:\Users\José\Documents\Estructura De Datos II\Proyecto actual\C\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.dll
+C:\Users\José\Documents\Estructura De Datos II\Proyecto actual\C\MensajeriaRelevanteSA\UsersAPI\obj\Debug\netcoreapp2.1\UsersAPI.pdb

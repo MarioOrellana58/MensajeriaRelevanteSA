@@ -6,7 +6,6 @@ using System.Net.Http;
 using System.Web;
 using System.Security.Cryptography;
 using System.Text;
-using Newtonsoft.Json;
 using AlternativeProcesses;
 namespace MensajesRelevantesSA.Repository
 {
@@ -58,8 +57,12 @@ namespace MensajesRelevantesSA.Repository
                 if (result.IsSuccessStatusCode)
                 {
                     var sessionCreator = new Autentication();                
-                    var jwt = sessionCreator.GenerateJWT(userName);
-                    SessionUserNode.getInstance.SetSessionUserNodeData(userName, jwt.Result, privateKey); 
+                    var jwt = sessionCreator.GenerateJWT(userName);                    
+                     HttpCookie objCookie = new HttpCookie("auth");
+                    objCookie["jwt"] = jwt.Result;//valida la vigencia de la sesión
+                    objCookie["username"] = userName;//adquiero datos
+                    objCookie["pk"] = user.PrivateKey.ToString();
+                    HttpContext.Current.Response.Cookies.Add(objCookie);   
                     return "200";
                 }
                 else
@@ -218,7 +221,11 @@ namespace MensajesRelevantesSA.Repository
             {                
                 var sessionCreator = new Autentication();                
                 var jwt = sessionCreator.GenerateJWT(userName);
-                SessionUserNode.getInstance.SetSessionUserNodeData(userName, jwt.Result, searchedUser.PrivateKey);               
+                 HttpCookie objCookie = new HttpCookie("auth");
+                objCookie["jwt"] = jwt.Result;//valida la vigencia de la sesión
+                objCookie["username"] = userName;//adquiero datos
+                objCookie["pk"] = searchedUser.PrivateKey.ToString();
+                HttpContext.Current.Response.Cookies.Add(objCookie);             
                 return  "200";
             }
 
