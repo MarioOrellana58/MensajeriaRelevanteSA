@@ -3,23 +3,23 @@
 @{
     ViewBag.Title = "Mensajería Relevante S.A.";
 }
-
+<h1 style="color:red">@ViewBag.LoggedUser</h1>
 @ViewBag.Error
 <div style="width:100%; height:auto; padding:3px" ;>
 
-    <div style="width:99%; height:250px; background:#dadada; padding:3px; text-align:center;">
+    <div style="width:99%; height:250px; background:#ffa259; padding:3px; text-align:center;">
 
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" style="margin-top: 5px;">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" style="margin-top: 5px; background:#fa4252">
             <img src='@Url.Content("~/Images/message.png")' />
         </button>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong" style="margin-top: 5px;">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong" style="margin-top: 5px; background:#fa4252">
             <img src='@Url.Content("~/Images/magnifier.png")' />
         </button>
         @using (Html.BeginForm("LogOut", "Users", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
             <div>
                 <form>
-                    <button type="submit" class="btn btn-primary" style="margin-top: 5px;">
+                    <button type="submit" class="btn btn-primary" style="margin-top: 5px; background:#fa4252">
                         <img src='@Url.Content("~/Images/exit.png")' />
                     </button>
                 </form>
@@ -34,7 +34,7 @@
 
                     <p>Ingrese su contraseña para eliminar su cuenta</p>
                     <p align="center"><input type="text" name="pass" maxlength="50" class="form-control pwd" required="required" /></p>
-                    <button type="submit" class="btn btn-primary" style="margin-top: -70px; margin-left:400px">
+                    <button type="submit" class="btn btn-primary" style="margin-top: -70px; margin-left:400px; background:#fa4252">
                         <img src='@Url.Content("~/Images/delete.png")' />
                     </button>
 
@@ -49,7 +49,7 @@
 
 
 <div style="width:100%; height:470px; padding:3px; float:left" ;>
-    <div style="width:29%; max-width = 300px; overflow:scroll; height:447px; background:#dadada; float:left;">
+    <div style="width:29%; max-width = 300px; overflow:scroll; height:447px; background:#fbe3b9; float:left;">
         @Html.Partial("_Chats", (List<string>)ViewBag.chats)
     </div>
 
@@ -61,13 +61,13 @@
     </div>
     <div style="width:69%; float:right;">
         <p align="right">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" style="margin-top: 5px;">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" style="margin-top: 5px; background-color:#fa4252">
                 <img src='@Url.Content("~/Images/message.png")' />
                 @using (Html.BeginForm("ExportChats", "Chats", FormMethod.Post, new { enctype = "multipart/form-data" }))
                 {
                     <div>
                         <form>
-                            <button type="submit" class="btn btn-primary" style="margin-top: 5px;">
+                            <button type="submit" class="btn btn-primary" style="margin-top: 5px; background-color:#fa4252">
                                 <img src='@Url.Content("~/Images/download.png")' />
                             </button>
 

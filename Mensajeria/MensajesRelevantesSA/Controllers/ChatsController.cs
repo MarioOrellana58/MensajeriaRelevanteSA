@@ -28,13 +28,14 @@ namespace MensajesRelevantesSA.Controllers
              HttpCookie objRequestRead= Request.Cookies["auth"];
             if (objRequestRead!= null && objRequestRead["jwt"]!= null  && JWT.ValidateSession(objRequestRead["jwt"], objRequestRead["username"]))
             {
-            http://localhost:51163/Users/ChangePassword
+                
+
                 if (objRequestRead!=null)
                 {
                     LoggedUser  =objRequestRead["username"];
                 }
                 ViewBag.chats = Messages.getAllContacts(LoggedUser);
-            
+                ViewBag.LoggedUser = LoggedUser;
 
                 if (receptor != null)
                 {

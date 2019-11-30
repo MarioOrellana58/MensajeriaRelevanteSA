@@ -32,8 +32,8 @@
         text-align: right;
         padding-right: 10px;
         padding-top: 10px;
-        padding-bottom: 10px;
-        background: #f8f5f5;
+        background: #fa4252;
+        color: #ffffff;
     }
 
 </style>
@@ -55,11 +55,13 @@
                         fileArray[0] = "no hay archivo";
                     }
                         <li class="emisor">
-                            @item.Message
+                            Emisor: @emitterReceptor[0] <br />
+                            Receptor: @emitterReceptor[1]<br />
                             @if (fileArray[0] != "no hay archivo")
                             {
                                 @Html.ActionLink((string)fileArray[0], "GetFile", "Chats", new { senderReceptor = item.SenderReceptor, sentDate = item.SentDate }, null)
                             }
+                            @item.Message<br />
                              @item.SentDate
                         </li>
                 }
