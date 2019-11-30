@@ -77,8 +77,19 @@ namespace MensajesRelevantesSA.Controllers
             if (objRequestRead!= null && objRequestRead["jwt"]!= null && JWT.ValidateSession(objRequestRead["jwt"], objRequestRead["username"]))
             {
                 string loggedUser = objRequestRead["username"];
-                return RedirectToAction("Index");    //validar si sí coincide el pass y redirigir o a index o a index chats de ser incorrect
-                //return RedirectToAction("Index", "Chats"); este redirecciona al index de chats
+                if (User.DeleteMyAccount(loggedUser, pass).Equals("Usuario eliminado correctamente"))
+                {
+                    var deleteMyMessages = new MessagesLogic();
+                    var IAmDone = deleteMyMessages.DeleteMessages(loggedUser);
+                    objRequestRead.Values["jwt"] = "400";
+                    Response.Cookies.Add(objRequestRead);
+                    return RedirectToAction("LogInUser");
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Chats"); 
+                }
+                
             }
             else
             {

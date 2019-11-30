@@ -26,7 +26,7 @@ namespace MensajesRelevantesSA.Controllers
         {
             
              HttpCookie objRequestRead= Request.Cookies["auth"];
-            if (objRequestRead!= null && objRequestRead["jwt"]!= null && JWT.ValidateSession(objRequestRead["jwt"], objRequestRead["username"]))
+            if (objRequestRead!= null && objRequestRead["jwt"]!= null  && JWT.ValidateSession(objRequestRead["jwt"], objRequestRead["username"]))
             {
             
                 if (objRequestRead!=null)
@@ -141,26 +141,14 @@ namespace MensajesRelevantesSA.Controllers
 
         [HttpPost]
         public ActionResult FindMessage(string messageToFound)
-        {   
-             HttpCookie objRequestRead= Request.Cookies["auth"];
-            if (objRequestRead!= null && objRequestRead["jwt"]!= null && JWT.ValidateSession(objRequestRead["jwt"], objRequestRead["username"]))
+        {
+            HttpCookie objRequestRead = Request.Cookies["auth"];
+            if (objRequestRead != null && objRequestRead["jwt"] != null && JWT.ValidateSession(objRequestRead["jwt"], objRequestRead["username"]))
             {
-                var messagesForView = Messages.MessageThatContainsSearch(messageToFound);
-                if (messagesForView == null)
-                {
-                    return RedirectToAction("Index");
-                }
-                
-                var jsonList =  JsonConvert.SerializeObject(messagesForView);
-                var path2 = Path.Combine(Server.MapPath("~/UploadedFiles"), "messagesForView.json");
-                if (!System.IO.File.Exists(path2)) 
-                {
-                    using (StreamWriter sw = System.IO.File.CreateText(path2)) 
-                    {
-                        sw.WriteLine(jsonList);
-                    }	
-                }
-                return RedirectToAction("Index"); 
+                //var messagesForView = Messages.MessageThatContainsSearch(messageToFound);
+                //return View("Index", new { receptor = string.Empty, messagesFromResearch = JsonConvert.SerializeObject(messagesForView) });
+                //return RedirectToAction("Index", new { receptor = string.Empty, messagesFromResearch = JsonConvert.SerializeObject(messagesForView)});         
+                return RedirectToAction("Index");
             }
             else
             {
@@ -175,11 +163,12 @@ namespace MensajesRelevantesSA.Controllers
 
         public ActionResult ExportChats()
         {
-            HttpCookie objRequestRead= Request.Cookies["auth"];
-            if (objRequestRead!= null && objRequestRead["jwt"]!= null && JWT.ValidateSession(objRequestRead["jwt"], objRequestRead["username"]))
+            HttpCookie objRequestRead = Request.Cookies["auth"];
+            if (objRequestRead != null && objRequestRead["jwt"] != null && JWT.ValidateSession(objRequestRead["jwt"], objRequestRead["username"]))
             {
-                string loggedUser = objRequestRead["username"];
-                return RedirectToAction("Index");    
+                var loggedUser = objRequestRead["username"];
+                var pathOfExportChat = Messages.ExportMyMessages();
+                return RedirectToAction("Index");
             }
             else
             {
@@ -187,6 +176,6 @@ namespace MensajesRelevantesSA.Controllers
             }
         }
 
-        
+
     }
 }

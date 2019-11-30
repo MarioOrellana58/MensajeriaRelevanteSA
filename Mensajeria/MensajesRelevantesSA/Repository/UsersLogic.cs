@@ -198,6 +198,45 @@ namespace MensajesRelevantesSA.Repository
 
         }
 
+        public string DeleteMyAccount(string userName, string password)
+        {
+            var searchedUser = getUserByUsername(userName);
+            if (searchedUser.GetType().ToString() == "System.String")
+            {
+                return searchedUser;
+            }
+            var hash256 = SHA256.Create();
+
+            var hashedBytes = hash256.ComputeHash(Encoding.Default.GetBytes(password));
+            password = Encoding.Default.GetString(hashedBytes);
+
+            var cipher = new CesarCipherAlgorithm();
+            cipher.DictionaryAsembler("mriojeda");
+
+            if (cipher.DecipherCesar(searchedUser.Password, "mriojeda") != password)
+            {
+                return "Tu contraseña es incorrecta :(";
+            }
+            else
+            {
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri("http://localhost:51209/api/Users");
+                    var responseTask = client.DeleteAsync("Users/" + userName);
+                    responseTask.Wait();
+                    var result = responseTask.Result;
+                    if (result.IsSuccessStatusCode)
+                    {
+                        return "Usuario eliminado correctamente";
+                    }
+                    else
+                    {
+                        return result.StatusCode.ToString() + ". Contacte a un desarrollador del sistema D:";
+                    }
+                }
+            }
+        }
+
         public string Validate(string userName, string password)
         {
             var searchedUser = getUserByUsername(userName);

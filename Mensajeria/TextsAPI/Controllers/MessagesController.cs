@@ -49,5 +49,23 @@ namespace TextsAPI.Controllers
             }
 
         }
+
+        [HttpDelete("{senderReceptor}")]
+        public IActionResult Delete(string senderReceptor)
+        {
+            var messageToDelete = _messagesService.Get(senderReceptor);
+
+            if (messageToDelete == null)
+            {
+                return StatusCode(404, "No existen mensajes :'(");
+            }
+
+            foreach (var item in messageToDelete)
+            {
+                _messagesService.Remove(item.SenderReceptor);
+            }
+
+            return StatusCode(200, "Mensajes eliminados");
+        }
     }
 }

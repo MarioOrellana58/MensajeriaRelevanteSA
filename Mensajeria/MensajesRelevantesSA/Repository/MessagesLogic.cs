@@ -7,6 +7,9 @@ using MensajesRelevantesSA.Models;
 using AlternativeProcesses;
 using System.Numerics;
 using AlternativeProcesses.CompressComponents;
+using System.IO;
+using Newtonsoft.Json;
+
 namespace MensajesRelevantesSA.Repository
 {
     public class MessagesLogic
@@ -263,8 +266,35 @@ namespace MensajesRelevantesSA.Repository
                 return FilePath;
             }
         }
-        
-        public List<MessageModel> MessageThatContainsSearch(string valueToLookFor)
+
+        public List<MessageModel> LookForMessages(string valueToLookFor)
+        {
+            return MyMessages().FindAll(messages => messages.Message.Contains(valueToLookFor));
+        }
+        public string ExportMyMessages()
+        {
+            var messagesToExport = MyMessages();
+            var path = Path.Combine(HttpContext.Current.Server.MapPath("~/UploadedFiles"), "Chats.csv");
+            if (!System.IO.File.Exists(path))
+            {
+                using (StreamWriter writer = System.IO.File.CreateText(path))
+                {
+                    for (int i = 0; i < messagesToExport.Count; i++)
+                    {
+                        if (i == messagesToExport.Count - 1)
+                        {
+                            writer.Write(JsonConvert.SerializeObject(messagesToExport[i]));
+                        }
+                        else
+                        {
+                            writer.Write(JsonConvert.SerializeObject(messagesToExport[i]) + ",");
+                        }
+                    }
+                }
+            }
+            return path;
+        }
+        public List<MessageModel> MyMessages()
         {
             var loggedUser = LoggedUser;
             var messagesThatContains = getAllUserMessages(loggedUser);
@@ -298,11 +328,31 @@ namespace MensajesRelevantesSA.Repository
                         resultOfTask.Add(item);
                     }
                 }
-                return resultOfTask.FindAll(messages => messages.Message.Contains(valueToLookFor));
+                return resultOfTask;
             }
             else
             {
                 return null;
+            }
+        }
+
+        public string DeleteMessages(string senderReceptor)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://localhost:53273/api/Texts");
+                var responseTask = client.DeleteAsync("Messages/" + senderReceptor);
+                responseTask.Wait();
+                var result = responseTask.Result;
+                var FilePath = string.Empty;
+                if (result.IsSuccessStatusCode)
+                {
+                    return "Mensajes eliminados";
+                }
+                else
+                {
+                    return "Ya no hay mensajes";
+                }
             }
         }
     }
