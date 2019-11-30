@@ -353,6 +353,7 @@
     <Content Include="Views\Chats\_Chats.cshtml" />
     <Content Include="Views\Chats\_Conversation.cshtml" />
     <Content Include="Views\Chats\Error.cshtml" />
+    <Content Include="Views\Chats\_FoundMessages.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

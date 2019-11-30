@@ -53,6 +53,28 @@ namespace MensajesRelevantesSA.Controllers
                         ViewBag.Error = "El usuario a quien intentas enviar un mensaje no existe";
                     }
                 }
+
+                var messagesList = new List<MessageModel>();
+                var jsonMessages = string.Empty;   
+                var path2 = Path.Combine(Server.MapPath("~/UploadedFiles"), "messagesForView.json");
+                if (System.IO.File.Exists(path2))
+                {                    
+                    using (StreamReader reader = System.IO.File.OpenText(path2)) 
+                    {
+                        string line = "";
+                        while ((line = reader.ReadLine()) != null) 
+                        {
+                            jsonMessages += line;
+                        }
+                        reader.Close();
+                    }
+                    System.IO.File.Delete(path2);
+                    JsonConvert.PopulateObject(jsonMessages, messagesList);
+                    ViewBag.Found = messagesList;
+
+                }
+
+                
                  
                  return View();               
 
@@ -89,21 +111,7 @@ namespace MensajesRelevantesSA.Controllers
                 return RedirectToAction("Error");
             }
         }
-
-        [HttpGet]  
-        public ActionResult NewMessage()  
-        {              
-             HttpCookie objRequestRead= Request.Cookies["auth"];
-            if (objRequestRead!= null && objRequestRead["jwt"]!= null && JWT.ValidateSession(objRequestRead["jwt"], objRequestRead["username"]))
-            {
-                 return View(); 
-            }
-            else
-            {
-                return RedirectToAction("Error");
-            }
-        }  
-
+        
         [HttpPost]  
         public ActionResult NewMessage(HttpPostedFileBase file, string Receptor, string Message)  
         {
@@ -138,9 +146,21 @@ namespace MensajesRelevantesSA.Controllers
             if (objRequestRead!= null && objRequestRead["jwt"]!= null && JWT.ValidateSession(objRequestRead["jwt"], objRequestRead["username"]))
             {
                 var messagesForView = Messages.MessageThatContainsSearch(messageToFound);
-                return View("Index", new { receptor = string.Empty, messagesFromResearch = JsonConvert.SerializeObject(messagesForView) });
-                //return RedirectToAction("Index", new { receptor = string.Empty, messagesFromResearch = JsonConvert.SerializeObject(messagesForView)});         
-                //return RedirectToAction("Index");    
+                if (messagesForView == null)
+                {
+                    return RedirectToAction("Index");
+                }
+                
+                var jsonList =  JsonConvert.SerializeObject(messagesForView);
+                var path2 = Path.Combine(Server.MapPath("~/UploadedFiles"), "messagesForView.json");
+                if (!System.IO.File.Exists(path2)) 
+                {
+                    using (StreamWriter sw = System.IO.File.CreateText(path2)) 
+                    {
+                        sw.WriteLine(jsonList);
+                    }	
+                }
+                return RedirectToAction("Index"); 
             }
             else
             {
