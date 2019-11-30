@@ -355,5 +355,47 @@ namespace MensajesRelevantesSA.Repository
                 }
             }
         }
+
+        public List<MessageModel> MessageThatContainsSearch(string valueToLookFor)
+        {
+            var loggedUser = LoggedUser;
+            var messagesThatContains = getAllUserMessages(loggedUser);
+            if (messagesThatContains.GetType().ToString() == "System.String")
+            {
+                return null;
+            }
+
+            if (messagesThatContains != null)
+            {
+                var resultOfTask = new List<MessageModel>();
+                var decipherMessage = new SDES();
+                var decompressFileMessage = new CompresssDecompressActions();
+                var getUser = new UsersLogic();
+                foreach (var item in messagesThatContains)
+                {
+                    var receptor = item.SenderReceptor.Split('|');
+                    if (receptor[0] == LoggedUser)
+                    {//es un mensaje que yo envié
+                        var a = getUser.getUserByUsername(receptor[1]).PrivateKey;
+                        var key = BigInteger.ModPow((int)item.PublicKey, a, p);
+                        var commonKey = Convert.ToString((int)key, 2);
+                        item.Message = item.Message != string.Empty ? decipherMessage.DecipherText(item.Message, commonKey) : string.Empty;
+                        resultOfTask.Add(item);
+                    }
+                    else
+                    {//es un mensaje recibido
+                        var key = BigInteger.ModPow((int)item.PublicKey, UserPrivateKey, p);
+                        var commonKey = Convert.ToString((int)key, 2);
+                        item.Message = item.Message != string.Empty ? decipherMessage.DecipherText(item.Message, commonKey) : string.Empty;
+                        resultOfTask.Add(item);
+                    }
+                }
+                return resultOfTask.FindAll(messages => messages.Message.Contains(valueToLookFor));
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }

@@ -104,7 +104,19 @@ namespace MensajesRelevantesSA.Controllers
             if (objRequestRead!= null && objRequestRead["jwt"]!= null && JWT.ValidateSession(objRequestRead["jwt"], objRequestRead["username"]))
             {
                 var filePath = Messages.DecompressSelectedFile(senderReceptor, sentDate);
-                return RedirectToAction("Index");
+                var fileName = string.Empty;
+                for (int i = filePath.Length-1; i > -1; i--)
+                {
+                    if (filePath[i] == '\\')
+                    {
+                        i++;
+                        fileName = filePath.Substring(i, filePath.Length-i);
+                        break;
+                    }
+                }
+                byte[] fileBytes = System.IO.File.ReadAllBytes(filePath);
+                System.IO.File.Delete(filePath);
+                return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
             }
             else
             {
@@ -142,13 +154,25 @@ namespace MensajesRelevantesSA.Controllers
         [HttpPost]
         public ActionResult FindMessage(string messageToFound)
         {
-            HttpCookie objRequestRead = Request.Cookies["auth"];
-            if (objRequestRead != null && objRequestRead["jwt"] != null && JWT.ValidateSession(objRequestRead["jwt"], objRequestRead["username"]))
+            HttpCookie objRequestRead= Request.Cookies["auth"];
+            if (objRequestRead!= null && objRequestRead["jwt"]!= null && JWT.ValidateSession(objRequestRead["jwt"], objRequestRead["username"]))
             {
-                //var messagesForView = Messages.MessageThatContainsSearch(messageToFound);
-                //return View("Index", new { receptor = string.Empty, messagesFromResearch = JsonConvert.SerializeObject(messagesForView) });
-                //return RedirectToAction("Index", new { receptor = string.Empty, messagesFromResearch = JsonConvert.SerializeObject(messagesForView)});         
-                return RedirectToAction("Index");
+                var messagesForView = Messages.MessageThatContainsSearch(messageToFound);
+                if (messagesForView == null)
+                {
+                    return RedirectToAction("Index");
+                }
+                
+                var jsonList =  JsonConvert.SerializeObject(messagesForView);
+                var path2 = Path.Combine(Server.MapPath("~/UploadedFiles"), "messagesForView.json");
+                if (!System.IO.File.Exists(path2)) 
+                {
+                    using (StreamWriter sw = System.IO.File.CreateText(path2)) 
+                    {
+                        sw.WriteLine(jsonList);
+                    }	
+                }
+                return RedirectToAction("Index"); 
             }
             else
             {
