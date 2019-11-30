@@ -96,5 +96,22 @@ namespace MensajesRelevantesSA.Controllers
                 return RedirectToAction("Error", "Chats");
             }
         }
+
+        public ActionResult LogOut()
+        {
+            HttpCookie objRequestRead= Request.Cookies["auth"];
+            Autentication JWT = new Autentication();
+            if (objRequestRead!= null && objRequestRead["jwt"]!= null && JWT.ValidateSession(objRequestRead["jwt"], objRequestRead["username"]))
+            {
+
+                    objRequestRead.Values["jwt"] = "400";
+                    Response.Cookies.Add(objRequestRead);
+                    return RedirectToAction("LogInUser");               
+            }
+            else
+            {
+                return RedirectToAction("Error", "Chats");
+            }
+        }
     }
 }
