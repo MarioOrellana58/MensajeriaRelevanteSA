@@ -209,7 +209,7 @@ namespace MensajesRelevantesSA.Repository
 
             var hashedBytes = hash256.ComputeHash(Encoding.Default.GetBytes(password));
             password = Encoding.Default.GetString(hashedBytes);
-
+            
             var cipher = new CesarCipherAlgorithm();
             cipher.DictionaryAsembler("mriojeda");
 

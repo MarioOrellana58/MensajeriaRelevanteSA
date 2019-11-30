@@ -28,7 +28,7 @@ namespace MensajesRelevantesSA.Controllers
              HttpCookie objRequestRead= Request.Cookies["auth"];
             if (objRequestRead!= null && objRequestRead["jwt"]!= null  && JWT.ValidateSession(objRequestRead["jwt"], objRequestRead["username"]))
             {
-            
+            http://localhost:51163/Users/ChangePassword
                 if (objRequestRead!=null)
                 {
                     LoggedUser  =objRequestRead["username"];
@@ -192,7 +192,16 @@ namespace MensajesRelevantesSA.Controllers
             {
                 var loggedUser = objRequestRead["username"];
                 var pathOfExportChat = Messages.ExportMyMessages();
-                return RedirectToAction("Index");
+                if (pathOfExportChat != string.Empty)
+                {
+                    byte[] fileBytes = System.IO.File.ReadAllBytes(pathOfExportChat);
+                    System.IO.File.Delete(pathOfExportChat);
+                    return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, pathOfExportChat);
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
             }
             else
             {

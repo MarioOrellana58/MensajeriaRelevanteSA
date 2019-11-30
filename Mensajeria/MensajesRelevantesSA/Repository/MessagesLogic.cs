@@ -274,25 +274,33 @@ namespace MensajesRelevantesSA.Repository
         public string ExportMyMessages()
         {
             var messagesToExport = MyMessages();
-            var path = Path.Combine(HttpContext.Current.Server.MapPath("~/UploadedFiles"), "Chats.csv");
-            if (!System.IO.File.Exists(path))
+            if (messagesToExport != null)
             {
-                using (StreamWriter writer = System.IO.File.CreateText(path))
+
+                var path = Path.Combine(HttpContext.Current.Server.MapPath("~/UploadedFiles"), "Chats.csv");
+                if (!System.IO.File.Exists(path))
                 {
-                    for (int i = 0; i < messagesToExport.Count; i++)
+                    using (StreamWriter writer = System.IO.File.CreateText(path))
                     {
-                        if (i == messagesToExport.Count - 1)
+                        for (int i = 0; i < messagesToExport.Count; i++)
                         {
-                            writer.Write(JsonConvert.SerializeObject(messagesToExport[i]));
-                        }
-                        else
-                        {
-                            writer.Write(JsonConvert.SerializeObject(messagesToExport[i]) + ",");
+                            if (i == messagesToExport.Count - 1)
+                            {
+                                writer.Write(JsonConvert.SerializeObject(messagesToExport[i]));
+                            }
+                            else
+                            {
+                                writer.Write(JsonConvert.SerializeObject(messagesToExport[i]) + ",");
+                            }
                         }
                     }
                 }
+                return path;
             }
-            return path;
+            else
+            {
+                return string.Empty;
+            }
         }
         public List<MessageModel> MyMessages()
         {
