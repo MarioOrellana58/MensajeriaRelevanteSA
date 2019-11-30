@@ -24,7 +24,7 @@ namespace MensajesRelevantesSA.Controllers
         {
             
              HttpCookie objRequestRead= Request.Cookies["auth"];
-            if (objRequestRead!= null && objRequestRead["jwt"]!= null && JWT.ValidateSession(objRequestRead["jwt"]))
+            if (objRequestRead!= null && objRequestRead["jwt"]!= null && JWT.ValidateSession(objRequestRead["jwt"], objRequestRead["username"]))
             {
             
                 if (objRequestRead!=null)
@@ -63,8 +63,8 @@ namespace MensajesRelevantesSA.Controllers
 
         public ActionResult GetChat(string Receptor)
         {  
-            HttpCookie objRequestRead= Request.Cookies["auth"];
-            if (objRequestRead!= null && objRequestRead["jwt"]!= null && JWT.ValidateSession(objRequestRead["jwt"]))
+             HttpCookie objRequestRead= Request.Cookies["auth"];
+            if (objRequestRead!= null && objRequestRead["jwt"]!= null && JWT.ValidateSession(objRequestRead["jwt"], objRequestRead["username"]))
             {
                 return RedirectToAction("Index",  new {  receptor = Receptor});
             }
@@ -76,8 +76,8 @@ namespace MensajesRelevantesSA.Controllers
 
         public ActionResult GetFile(string senderReceptor, DateTime sentDate)
         {
-            HttpCookie objRequestRead= Request.Cookies["auth"];
-            if (objRequestRead!= null && objRequestRead["jwt"]!= null && JWT.ValidateSession(objRequestRead["jwt"]))
+             HttpCookie objRequestRead= Request.Cookies["auth"];
+            if (objRequestRead!= null && objRequestRead["jwt"]!= null && JWT.ValidateSession(objRequestRead["jwt"], objRequestRead["username"]))
             {
                 var filePath = Messages.DecompressSelectedFile(senderReceptor, sentDate);
                 return RedirectToAction("Index");
@@ -91,8 +91,8 @@ namespace MensajesRelevantesSA.Controllers
         [HttpGet]  
         public ActionResult NewMessage()  
         {              
-            HttpCookie objRequestRead= Request.Cookies["auth"];
-            if (objRequestRead!= null && objRequestRead["jwt"]!= null && JWT.ValidateSession(objRequestRead["jwt"]))
+             HttpCookie objRequestRead= Request.Cookies["auth"];
+            if (objRequestRead!= null && objRequestRead["jwt"]!= null && JWT.ValidateSession(objRequestRead["jwt"], objRequestRead["username"]))
             {
                  return View(); 
             }
@@ -105,8 +105,8 @@ namespace MensajesRelevantesSA.Controllers
         [HttpPost]  
         public ActionResult NewMessage(HttpPostedFileBase file, string Receptor, string Message)  
         {
-            HttpCookie objRequestRead= Request.Cookies["auth"];
-            if (objRequestRead!= null && objRequestRead["jwt"]!= null && JWT.ValidateSession(objRequestRead["jwt"]))
+             HttpCookie objRequestRead= Request.Cookies["auth"];
+            if (objRequestRead!= null && objRequestRead["jwt"]!= null && JWT.ValidateSession(objRequestRead["jwt"], objRequestRead["username"]))
             {
                 if (objRequestRead!=null)
                 {
@@ -132,8 +132,8 @@ namespace MensajesRelevantesSA.Controllers
         [HttpPost]
         public ActionResult FindMessage(string toFoundMessage)
         {   
-            HttpCookie objRequestRead= Request.Cookies["auth"];
-            if (objRequestRead!= null && objRequestRead["jwt"]!= null && JWT.ValidateSession(objRequestRead["jwt"]))
+             HttpCookie objRequestRead= Request.Cookies["auth"];
+            if (objRequestRead!= null && objRequestRead["jwt"]!= null && JWT.ValidateSession(objRequestRead["jwt"], objRequestRead["username"]))
             {   
                 return RedirectToAction("Index");    
             }
