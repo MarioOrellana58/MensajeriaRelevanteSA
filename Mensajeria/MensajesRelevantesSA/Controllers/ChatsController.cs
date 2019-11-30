@@ -9,6 +9,8 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using MensajesRelevantesSA.Models;
 using MensajesRelevantesSA.Repository;
+using Newtonsoft.Json;
+
 namespace MensajesRelevantesSA.Controllers
 {
 
@@ -130,12 +132,15 @@ namespace MensajesRelevantesSA.Controllers
         }
 
         [HttpPost]
-        public ActionResult FindMessage(string toFoundMessage)
+        public ActionResult FindMessage(string messageToFound)
         {   
              HttpCookie objRequestRead= Request.Cookies["auth"];
             if (objRequestRead!= null && objRequestRead["jwt"]!= null && JWT.ValidateSession(objRequestRead["jwt"], objRequestRead["username"]))
-            {   
-                return RedirectToAction("Index");    
+            {
+                var messagesForView = Messages.MessageThatContainsSearch(messageToFound);
+                return View("Index", new { receptor = string.Empty, messagesFromResearch = JsonConvert.SerializeObject(messagesForView) });
+                //return RedirectToAction("Index", new { receptor = string.Empty, messagesFromResearch = JsonConvert.SerializeObject(messagesForView)});         
+                //return RedirectToAction("Index");    
             }
             else
             {
